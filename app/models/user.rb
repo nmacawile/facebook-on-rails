@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
          
+  has_many :posts
+         
   validates :last_name, presence: true,
                         length: { maximum: 50 }
   validates :first_name, presence: true,

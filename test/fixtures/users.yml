@@ -4,3 +4,13 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
+
+user1:
+  first_name: Foo
+  last_name: Bar
+  username: foobar
+  email: foobar@email.com
+  birthday: Date.parse("09/09/1999")
+  gender: :not_telling
+  encrypted_password: abc123
+  
