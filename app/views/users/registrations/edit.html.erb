@@ -25,13 +25,13 @@
   
   <div class="field">
     <%= f.label :gender %><br />
-    <%= f.radio_button :gender, 0 %>
+    <%= f.radio_button :gender, "male" %>
     <%= f.label :male %><br />
-    <%= f.radio_button :gender, 1 %>
+    <%= f.radio_button :gender, "female" %>
     <%= f.label :female %><br />
-    <%= f.radio_button :gender, 2 %>
+    <%= f.radio_button :gender, "other" %>
     <%= f.label :other %><br />
-    <%= f.radio_button :gender, 3, checked: true %>
+    <%= f.radio_button :gender, "not_telling", checked: true %>
     <%= f.label :not_telling%><br />
   </div>
   
