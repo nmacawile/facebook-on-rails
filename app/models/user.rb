@@ -20,6 +20,10 @@ class User < ApplicationRecord
   
   enum gender: [:male, :female, :other, :not_telling]
   
+  def to_param
+    username
+  end
+  
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first

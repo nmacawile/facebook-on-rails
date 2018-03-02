@@ -1,5 +1,12 @@
 <h1><%= @user.username %>'s profile</h1>
 
+<%= form_for [@user, Post.new] do |f| %>
+  <%= f.label :post %>
+  <%= f.text_area :body %>
+  <%= f.submit :post %>
+<% end %>
+
+
 <h2>Posts</h2>
 <% @user.posts.each do |post| %>
   <div>
@@ -7,6 +14,8 @@
     <p>
       <%= post.body %>
     </p>
+    <%= link_to "Edit", edit_post_path(post) %> |
+    <%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure?" } %>
   </div>
   <br />
 <% end %>
