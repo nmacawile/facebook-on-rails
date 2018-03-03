@@ -28,6 +28,15 @@ class User < ApplicationRecord
     username
   end
   
+  def self.search(query)
+    return [] if query.blank?
+    if query =~ /@/
+      where(email: query)
+    else
+      where("concat_ws(' ', first_name, last_name, first_name, username) ILIKE ?", "%#{query.squish}%")
+    end
+  end
+  
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first

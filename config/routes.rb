@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:edit, :update, :create, :destroy]
     end
   end
+  get "/search", to: "users#search"
   devise_for :users, controllers: { registrations: "users/registrations",
                                     omniauth_callbacks: 'users/omniauth_callbacks' }
 end

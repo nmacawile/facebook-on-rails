@@ -6,6 +6,10 @@ class UsersController < ApplicationController
     @post = Post.new
   end
   
+  def search
+    @results = User.search(params[:q])
+  end
+  
   private
   
     def load_user

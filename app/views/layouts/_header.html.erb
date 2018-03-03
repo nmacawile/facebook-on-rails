@@ -1,7 +1,13 @@
+<% if user_signed_in? %>
+  <%= form_tag search_path, method: :get, enforce_utf8: false, authenticity_token: false do %>
+    <%= text_field_tag :q %>
+    <%= submit_tag :search, name: nil %>
+  <% end %>
+<% end %>
 <ul>
   <% if user_signed_in? %>
     <li>
-      <%= "Signed-in as " %> <strong><%= current_user.username %></strong>
+      <%= "Signed-in as " %> <strong><%= link_to current_user.username, current_user %></strong>
     </li>
     <li>
       <%= link_to("Settings", edit_user_registration_path) %>

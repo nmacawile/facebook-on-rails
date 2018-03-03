@@ -31,3 +31,39 @@ user3:
   birthday: Date.parse("09/09/1999")
   gender: :not_telling
   encrypted_password: abc123
+  
+user4:
+  first_name: "Cool First Name"
+  last_name: Test1
+  username: test1
+  email: test1@email.com
+  birthday: Date.parse("09/09/1999")
+  gender: :not_telling
+  encrypted_password: abc123
+  
+user5:
+  first_name: Test2
+  last_name: "Cool Last Name"
+  username: test2
+  email: test2@email.com
+  birthday: Date.parse("09/09/1999")
+  gender: :not_telling
+  encrypted_password: abc123
+  
+user6:
+  first_name: Test3
+  last_name: Test3
+  username: coolusername
+  email: test3@email.com
+  birthday: Date.parse("09/09/1999")
+  gender: :not_telling
+  encrypted_password: abc123
+  
+user7:
+  first_name: Test4
+  last_name: Test4
+  username: test4
+  email: cool@email.com
+  birthday: Date.parse("09/09/1999")
+  gender: :not_telling
+  encrypted_password: abc123
