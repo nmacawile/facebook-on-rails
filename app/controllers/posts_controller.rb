@@ -42,7 +42,7 @@ class PostsController < ApplicationController
     end
     
     def load_user
-      @user = User.find_by(username: params[:user_username])
+      @user = User.find_by_username(params[:user_username])
     end
     
     def load_post

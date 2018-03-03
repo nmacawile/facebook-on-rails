@@ -13,6 +13,6 @@ class UsersController < ApplicationController
   private
   
     def load_user
-      @user = User.find_by(username: params[:username])
+      @user = User.find_by_username(params[:username])
     end
 end

@@ -52,7 +52,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
   
   test "#create, not signed in" do
-    assert_no_difference "User.find_by(username: @user.username).posts.count" do
+    assert_no_difference "User.find_by_username(@user.username).posts.count" do
       post user_posts_path(@user.username, params: { post: { body: "new post" } })
     end
     assert_redirected_to new_user_session_path
@@ -60,14 +60,14 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   
   test "#create, user signed in" do
     sign_in @user
-    assert_difference "User.find_by(username: @user.username).posts.count", 1 do
+    assert_difference "User.find_by_username(@user.username).posts.count", 1 do
       post user_posts_path(@user.username, params: { post: { body: "new post" } })
     end
     assert_redirected_to @user
   end
   
   test "#delete, not signed in" do
-    assert_no_difference "User.find_by(username: @user.username).posts.count" do
+    assert_no_difference "User.find_by_username(@user.username).posts.count" do
       delete post_path @post
     end
     assert_redirected_to new_user_session_path
@@ -75,7 +75,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   
   test "#delete, user signed in" do
     sign_in @user
-    assert_difference "User.find_by(username: @user.username).posts.count", -1 do
+    assert_difference "User.find_by_username(@user.username).posts.count", -1 do
       delete post_path @post
     end
     assert_redirected_to @user
@@ -83,7 +83,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   
   test "#delete, poster signed in" do
     sign_in @user2
-    assert_difference "User.find_by(username: @user.username).posts.count", -1 do
+    assert_difference "User.find_by_username(@user.username).posts.count", -1 do
       delete post_path @post2
     end
     assert_redirected_to @user
@@ -91,7 +91,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   
   test "#delete, neither poster nor user signed in" do
     sign_in users(:user3)
-    assert_no_difference "User.find_by(username: @user.username).posts.count" do
+    assert_no_difference "User.find_by_username(@user.username).posts.count" do
       delete post_path @post2
     end
     assert_redirected_to @user

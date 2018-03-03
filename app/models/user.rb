@@ -37,6 +37,10 @@ class User < ApplicationRecord
     end
   end
   
+  def self.find_by_username(username)
+    where("LOWER(username) = ?", username.downcase).first
+  end
+  
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first

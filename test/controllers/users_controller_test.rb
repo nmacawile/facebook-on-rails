@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
+  
+  test "#show should match case-insensitively" do
+    get '/user/SpongeBoB'
+    assert_response :success
+  end
     
   test "#search should match first name, last name, or username" do
     get search_path(q: "cool")
