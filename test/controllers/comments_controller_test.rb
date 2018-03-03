@@ -1,0 +1,100 @@
+require 'test_helper'
+
+class CommentsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  
+  def setup
+    @comment = comments(:comment1)
+    @commenter = users(:user2)
+    @page_owner = users(:user1)
+    @post = posts(:post1)
+  end
+  
+  test "#edit, not signed in" do
+    get edit_comment_path @comment
+    assert_redirected_to new_user_session_path
+  end
+  
+  test "#edit, commenter signed in" do
+    sign_in @commenter
+    get edit_comment_path @comment
+    assert_response :success
+    assert_template :edit
+  end
+  
+  test "#edit, signed in but not the commenter" do
+    sign_in @page_owner
+    get edit_comment_path @comment
+    assert_redirected_to @page_owner
+    assert_not flash.empty?
+  end
+  
+  test "#update, not signed in" do
+    patch comment_path(@comment, params: { comment: { body: "updated comment" } })
+    assert_redirected_to new_user_session_path
+  end
+  
+  test "#update, commenter signed in" do
+    sign_in @commenter
+    patch comment_path(@comment, params: { comment: { body: "updated comment" } })
+    assert_redirected_to @page_owner
+    follow_redirect!
+    assert_match "updated comment", response.body
+  end
+  
+  test "#update, signed in but not the commenter" do
+    sign_in @page_owner
+    patch comment_path(@comment, params: { comment: { body: "updated comment" } })
+    assert_redirected_to @page_owner
+    follow_redirect!
+    assert_not flash.empty?
+    assert_no_match "updated comment", response.body
+  end
+  
+  test "#create, not signed in" do
+    assert_no_difference "@post.comments.count" do
+      post post_comments_path(@post, params: { comment: { body: "new comment" } })
+    end
+    assert_redirected_to new_user_session_path
+  end
+  
+  test "#create, user signed in" do
+    sign_in @page_owner
+    assert_difference "@post.comments.count", 1 do
+      post post_comments_path(@post, params: { comment: { body: "new comment" } })
+    end
+    assert_redirected_to @page_owner
+  end
+  
+  test "#delete, not signed in" do
+    assert_no_difference "@post.comments.count" do
+      delete comment_path @comment
+    end
+    assert_redirected_to new_user_session_path
+  end
+  
+  test "#delete, page owner signed in" do
+    sign_in @page_owner
+    assert_difference "@post.comments.count", -1 do
+      delete comment_path @comment
+    end
+    assert_redirected_to @page_owner
+  end
+  
+  test "#delete, commenter signed in" do
+    sign_in @commenter
+    assert_difference "@post.comments.count", -1 do
+      delete comment_path @comment
+    end
+    assert_redirected_to @page_owner
+  end
+  
+  test "#delete, neither commenter nor page owner signed in" do
+    sign_in users(:user3)
+    assert_no_difference "@post.comments.count" do
+      delete comment_path @comment
+    end
+    assert_redirected_to @page_owner
+    assert_not flash.empty?
+  end
+end

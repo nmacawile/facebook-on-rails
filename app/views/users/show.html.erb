@@ -15,6 +15,22 @@
     </p>
     <%= link_to "Edit", edit_post_path(post) %> |
     <%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure?" } %>
+    <ul>
+      <li>
+        <%= form_for [post, Comment.new] do |f| %>
+          <%= f.label :comment %>
+          <%= f.text_area :body %>
+          <%= f.submit :comment %>
+        <% end %>
+      </li>
+      <% post.comments.each do |comment| %>
+        <li>
+          <strong><%= comment.user.username %></strong>: <%= comment.body %><br />
+          <%= link_to "Edit", edit_comment_path(comment) %> |
+          <%= link_to "Delete", comment_path(comment), method: :delete, data: { confirm: "Are you sure?" } %>
+        </li>
+      <% end %>
+    </ul>
   </div>
   <br />
 <% end %>

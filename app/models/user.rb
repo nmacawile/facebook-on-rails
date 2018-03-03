@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :posts_authored, class_name: "Post",
                             foreign_key: :poster_id,
                             dependent: :destroy
+  has_many :comments, dependent: :destroy
          
   validates :last_name, presence: true,
                         length: { maximum: 50 }
