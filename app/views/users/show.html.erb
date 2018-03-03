@@ -1,16 +1,15 @@
 <h1><%= @user.username %>'s profile</h1>
 
-<%= form_for [@user, Post.new] do |f| %>
+<%= form_for [@user, @post] do |f| %>
   <%= f.label :post %>
   <%= f.text_area :body %>
   <%= f.submit :post %>
 <% end %>
 
-
 <h2>Posts</h2>
 <% @user.posts.each do |post| %>
   <div>
-    <strong><%= @user.username %></strong>
+    <strong><%= post.poster.username %></strong>
     <p>
       <%= post.body %>
     </p>

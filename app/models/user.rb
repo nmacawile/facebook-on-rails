@@ -5,7 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
          
-  has_many :posts
+  has_many :posts, dependent: :destroy
+  has_many :posts_authored, class_name: "Post",
+                            foreign_key: :poster_id,
+                            dependent: :destroy
          
   validates :last_name, presence: true,
                         length: { maximum: 50 }

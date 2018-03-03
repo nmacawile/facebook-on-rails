@@ -4,7 +4,8 @@ class PostTest < ActiveSupport::TestCase
   
   def setup
     poster = users(:user1)
-    @post = poster.posts.build(body: "thequickbrownfoxjumpsoverthelazydog")
+    @post = poster.posts.build(poster: poster,
+                               body: "thequickbrownfoxjumpsoverthelazydog")
   end
   
   test "should be valid" do

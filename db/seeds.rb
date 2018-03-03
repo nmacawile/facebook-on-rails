@@ -9,6 +9,10 @@
                    password: "111111",
                    password_confirmation: "111111")
   5.times do 
-    u.posts.create!(body: Faker::Lorem.paragraph)
+    u.posts.create!(poster: u, body: Faker::Lorem.paragraph)
   end
+end
+
+User.limit(2).offset(1).each do |u|
+  User.first.posts.create!(poster: u, body: Faker::Lorem.paragraph)
 end

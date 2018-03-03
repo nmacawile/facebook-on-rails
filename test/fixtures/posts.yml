@@ -2,4 +2,11 @@
 
 post1:
   user: user1
+  poster: user1
   body: "Hello world!"
+  
+
+post2:
+  user: user1
+  poster: user2
+  body: "What's up?"
