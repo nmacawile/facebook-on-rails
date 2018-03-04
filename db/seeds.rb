@@ -1,11 +1,11 @@
-User.create!(email: "a@a",
-             first_name: "me",
-             last_name: "account",
-             birthday: Date.parse("10/10/2000"),
-             gender: :not_telling,
-             username: "m",
-             password: "111111",
-             password_confirmation: "111111")
+a = User.create!(email: "a@a",
+                 first_name: "me",
+                 last_name: "account",
+                 birthday: Date.parse("10/10/2000"),
+                 gender: :not_telling,
+                 username: "m",
+                 password: "111111",
+                 password_confirmation: "111111")
 
 
 20.times do |n|
@@ -27,4 +27,8 @@ end
 
 User.limit(2).offset(1).each do |u|
   User.first.posts.create!(poster: u, body: Faker::Lorem.paragraph)
+end
+
+User.limit(5).offset(1).each do |u|
+  u.add_as_friend! a
 end

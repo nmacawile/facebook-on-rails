@@ -1,4 +1,12 @@
 <h1><%= @user.username %>'s profile</h1>
+<%= link_to "Friends", friends_user_path(@user) %>
+
+<% if current_user == @user %>
+<% elsif @friendship %>
+  <%= link_to "Remove as Friend", @friendship, method: :delete, data: { confirm: "Are you sure?" } %>
+<% else %>
+  <%= link_to "Add as a Friend", friendships_path(id: @user.id), method: :post %>
+<% end %>
 
 <%= form_for [@user, @post] do |f| %>
   <%= f.label :post %>
@@ -9,13 +17,20 @@
 <h2>Posts</h2>
 <% @user.posts.each do |post| %>
   <div>
-    <strong><%= post.poster.username %></strong>
+    <strong><%= link_to post.poster.username, post.poster %></strong>
     <p>
       <%= post.body %>
     </p>
     <%= link_to "Edit", edit_post_path(post) %> |
     <%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure?" } %>
     <ul>
+      <% post.comments.each do |comment| %>
+        <li>
+          <strong><%= link_to comment.user.username, comment.user %></strong>: <%= comment.body %><br />
+          <%= link_to "Edit", edit_comment_path(comment) %> |
+          <%= link_to "Delete", comment_path(comment), method: :delete, data: { confirm: "Are you sure?" } %>
+        </li>
+      <% end %>
       <li>
         <%= form_for [post, Comment.new] do |f| %>
           <%= f.label :comment %>
@@ -23,13 +38,6 @@
           <%= f.submit :comment %>
         <% end %>
       </li>
-      <% post.comments.each do |comment| %>
-        <li>
-          <strong><%= comment.user.username %></strong>: <%= comment.body %><br />
-          <%= link_to "Edit", edit_comment_path(comment) %> |
-          <%= link_to "Delete", comment_path(comment), method: :delete, data: { confirm: "Are you sure?" } %>
-        </li>
-      <% end %>
     </ul>
   </div>
   <br />

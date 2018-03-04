@@ -10,6 +10,16 @@ class User < ApplicationRecord
                             foreign_key: :poster_id,
                             dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
+  
+  has_many :reverse_friendships, class_name: "Friendship",
+                                 foreign_key: :friend_id,
+                                 dependent: :destroy
+  has_many :reverse_friends, class_name: "User",
+                             through: :reverse_friendships,
+                             source: :user
+  
          
   validates :last_name, presence: true,
                         length: { maximum: 50 }
@@ -23,6 +33,20 @@ class User < ApplicationRecord
                        uniqueness: { case_sensitive: false }
   
   enum gender: [:male, :female, :other, :not_telling]
+  
+  def add_as_friend!(user)
+    self.friends << user
+    self.reverse_friends << user
+  end
+  
+  def unfriend!(user)
+    self.friends.delete(user)
+    self.reverse_friends.delete(user)
+  end
+  
+  def friends_with?(user)
+    friends.include? user
+  end
   
   def to_param
     username
