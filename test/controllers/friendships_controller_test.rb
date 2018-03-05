@@ -15,31 +15,31 @@ class FriendshipsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to new_user_session_path
   end
-  
-  test "#create should create two entries on success" do
-    sign_in @spongebob
-    assert_difference "Friendship.count", 2 do
-      post friendships_path(id: @not_friend.id)
-    end
-    assert_redirected_to @not_friend
-  end
-  
-  test "#create should not allow user to add itself" do
-    sign_in @spongebob
-    assert_no_difference "Friendship.count" do
-      post friendships_path(id: @spongebob.id)
-    end
-    assert_redirected_to @spongebob
-  end
-  
-  test "#create should not allow to add a user who is already a friend" do
-    sign_in @spongebob
+
+  test "#create should require a friend request from the friend to add" do
+    sign_in @not_friend
     assert_no_difference "Friendship.count" do
       post friendships_path(id: @patrick.id)
     end
     assert_redirected_to @patrick
   end
   
+  test "#create should create two friendship entries on success" do
+    sign_in @spongebob
+    assert_difference "Friendship.count", 2 do
+      post friendships_path(id: @not_friend.id)
+    end
+    assert_redirected_to @not_friend
+  end
+
+  test "#create should delete the requirement friend request on success" do
+    sign_in @spongebob
+    assert_difference "FriendRequest.count", -1 do
+      post friendships_path(id: @not_friend.id)
+    end
+    assert_redirected_to @not_friend
+  end
+
   test "#destroy should require login" do
     assert_no_difference "Friendship.count" do
       delete friendship_path(@friendship)

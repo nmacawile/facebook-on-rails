@@ -1,19 +1,14 @@
 class FriendshipsController < ApplicationController
     
   before_action :authenticate_user!
+  before_action :load_friend_to_add, only: :create
+  before_action :require_friend_request, only: :create
   before_action :friendship_exists, only: :destroy
   before_action :load_friendship, only: :destroy
   before_action :user_involved_only, only: :destroy
   
   def create
-    friend = User.find(params[:id])
-    if Friendship.new(user: current_user, friend: friend).valid?
-      current_user.add_as_friend! friend
-      flash[:sucess] = "You are now friends with #{friend.username}."
-    else
-      flash[:danger] = "There was a problem."
-    end
-    redirect_to friend
+    make_friends(current_user, @friend_to_add)
   end
   
   def destroy
@@ -23,6 +18,17 @@ class FriendshipsController < ApplicationController
   end
   
   private
+
+    def load_friend_to_add
+      @friend_to_add = User.find(params[:id])
+    end
+
+    def require_friend_request
+      unless FriendRequest.exists?(user_id: params[:id], friend_id: current_user.id)
+        flash[:danger] = "You need a friend request from this user."
+        redirect_to @friend_to_add
+      end
+    end
     
     def friendship_exists
       unless Friendship.exists?(params[:id])

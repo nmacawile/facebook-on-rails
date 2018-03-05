@@ -16,10 +16,19 @@ class User < ApplicationRecord
   has_many :reverse_friendships, class_name: "Friendship",
                                  foreign_key: :friend_id,
                                  dependent: :destroy
-  has_many :reverse_friends, class_name: "User",
-                             through: :reverse_friendships,
+  has_many :reverse_friends, through: :reverse_friendships,
                              source: :user
-  
+
+  has_many :friend_requests_sent, class_name: "FriendRequest",
+                                  dependent: :destroy
+  has_many :friends_pending, through: :friend_requests_sent,
+                             source: :friend
+
+  has_many :friend_requests_received, class_name: "FriendRequest",
+                                      foreign_key: :friend_id,
+                                      dependent: :destroy
+  has_many :friends_to_confirm, through: :friend_requests_received,
+                                source: :user
          
   validates :last_name, presence: true,
                         length: { maximum: 50 }
@@ -37,6 +46,7 @@ class User < ApplicationRecord
   def add_as_friend!(user)
     self.friends << user
     self.reverse_friends << user
+    self.friends_to_confirm.delete(user)
   end
   
   def unfriend!(user)

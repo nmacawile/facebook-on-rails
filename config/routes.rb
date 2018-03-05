@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
   end
   resources :friendships, only: [:create, :destroy]
+  resources :friend_requests, only: [:create, :destroy]
   get "/search", to: "users#search"
   devise_for :users, controllers: { registrations: "users/registrations",
                                     omniauth_callbacks: 'users/omniauth_callbacks' }
