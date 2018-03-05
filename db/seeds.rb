@@ -36,3 +36,7 @@ end
 User.limit(5).offset(6).each do |u|
   FriendRequest.create!(user: a, friend: u)
 end
+
+User.limit(5).offset(11).each do |u|
+  FriendRequest.create!(user: u, friend: a)
+end

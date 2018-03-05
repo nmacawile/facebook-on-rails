@@ -1,20 +1,8 @@
 <h1><%= @user.username %>'s profile</h1>
 <%= link_to "Friends", friends_user_path(@user) %>
 
+<%= friendship_action_links(@user) %>
 
-
-<% if current_user == @user %>
-<% #self %>
-<% elsif @friendship %>
-  <%= link_to "Remove as Friend", @friendship, method: :delete, data: { confirm: "Are you sure?" } %>
-<% elsif @friend_request_out %>
-  <%= link_to "Cancel Friend Request", @friend_request_out, method: :delete, data: { confirm: "Are you sure?" } %>
-<% elsif @friend_request_in %>
-  <%= link_to "Confirm as Friend", friendships_path(id: @user.id), method: :post %>
-  <%= link_to "Reject Request", @friend_request_out, method: :delete, data: { confirm: "Are you sure?" } %>
-<% else %>
-  <%= link_to "Add as Friend", friend_requests_path(id: @user.id), method: :post %> 
-<% end %>
 
 
 <%= form_for [@user, @post] do |f| %>
