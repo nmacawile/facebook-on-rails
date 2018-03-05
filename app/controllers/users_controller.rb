@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @post = Post.new
   end
   
-  def search
+  def index
     @results = User.search(params[:q])
   end
   
