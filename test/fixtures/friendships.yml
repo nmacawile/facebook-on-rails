@@ -7,3 +7,19 @@ friendship1:
 friendship1_2:
   user: user3
   friend: user2 
+  
+friendship2:
+  user: user1
+  friend: user4
+  
+friendship2_2:
+  user: user4
+  friend: user1
+  
+friendship3:
+  user: user4
+  friend: user5
+  
+friendship3_2:
+  user: user5
+  friend: user4  

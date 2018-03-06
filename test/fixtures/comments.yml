@@ -3,3 +3,11 @@
 comment1:
   user: user2
   post: post1
+  
+comment2:
+  user: user1
+  post: post2
+  
+comment3:
+  user: user2
+  post: post2

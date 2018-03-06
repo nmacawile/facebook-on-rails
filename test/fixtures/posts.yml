@@ -4,9 +4,13 @@ post1:
   user: user1
   poster: user1
   body: "Hello world!"
-  
 
 post2:
+  user: user4
+  poster: user5
+  body: "What's up?"
+  
+post3:
   user: user1
   poster: user2
-  body: "What's up?"
+  body: "Yo."

@@ -1,10 +1,12 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_post, only: :create
+  before_action :page_owner_or_friend_only, only: :create
   before_action :load_comment, only: [:edit, :update, :destroy]
   before_action :load_page_owner, only: [:edit, :update, :destroy]
   before_action :commenter_or_page_owner_only, only: :destroy
   before_action :commenter_only, only: [:edit, :update]
+  before_action :check_if_owner_or_still_friends, only: [:edit, :update]
   
   def edit
   end
@@ -43,6 +45,13 @@ class CommentsController < ApplicationController
     
     def load_post
       @post = Post.find(params[:post_id])
+      @page_owner = @post.user
+    end
+    
+    def page_owner_or_friend_only
+      unless @post.user == current_user || Friendship.exists?(user: current_user, friend: @page_owner)
+        redirect_to_owner
+      end
     end
     
     def load_comment
@@ -59,6 +68,12 @@ class CommentsController < ApplicationController
     
     def commenter_only
       redirect_to_owner unless current_user == @comment.user
+    end
+    
+    def check_if_owner_or_still_friends
+      unless current_user == @page_owner || Friendship.exists?(user: current_user, friend: @page_owner)
+        redirect_to_owner
+      end
     end
     
     def redirect_to_owner
