@@ -1,0 +1,19 @@
+<div class="banner">
+  <div class="row">
+    <img src="http://via.placeholder.com/1500x300">
+  </div>
+</div>
+
+<div class="navbar navbar-default profile-nav">
+  <div class="container">
+    <div class="col-md-3 col-sm-4 avatar-container">
+      <div class="avatar-main"><img src="http://via.placeholder.com/200x200"></div>
+    </div>
+    <div>
+      <ul class="nav navbar-nav col-sm-8 col-md-9">
+        <li <%= 'class=active' if active == :posts %>><%= link_to "Posts", user_path(@user) %></li>
+        <li <%= 'class=active' if active == :friends %>><%= link_to "Friends", friends_user_path(@user) %></li>
+      </ul>
+    </div>
+  </div>
+</div>

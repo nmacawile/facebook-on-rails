@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Workspace</title>
+    <title>Facebook on Rails</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,8 +9,10 @@
   </head>
 
   <body>
-    <%= render "layouts/header" %>
-    <%= render "layouts/flash" %>
-    <%= yield %>
+    <div style="margin-top: 50px;">
+      <%= render "shared/header" %>
+      <%= render "shared/flash" %>
+      <%= yield %>
+    </div>
   </body>
 </html>

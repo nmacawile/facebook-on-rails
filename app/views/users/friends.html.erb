@@ -1,26 +1,11 @@
-<h1><%= @user.username %>'s Friends</h1>
-
-<ul>
-  <h1>Friends</h1>
-  <% @friends.each do |f| %>
-    <%= link_to f.username, f %>
-  <% end %>
-</ul>
-
-<% if @friends_pending %>
-  <ul>
-    <h1>Waiting for confirmation</h1>
-    <% @friends_pending.each do |f| %>
-      <%= link_to f.username, f %>
-    <% end %>
-  </ul>
-<% end %>
-
-<% if @friends_to_confirm %>
-  <ul>
-    <h1>Friend Requests</h1>
-    <% @friends_to_confirm.each do |f| %>
-      <%= link_to f.username, f %>
-    <% end %>
-  </ul>
-<% end %>
+<%= render "banner", active: :friends %>
+<div class="container" id="main-container">
+  <div class="row">
+    <div class="col-md-3">
+      <h3><%= @user.full_name %></h3>
+      <h4>@<%= @user.username %></h4>
+      <%= friendship_action_links(@user) %>
+    </div>
+    <%= render "shared/user_cards", collection: @user.friends, title: "" %>
+  </div>
+</div>

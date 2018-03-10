@@ -11,4 +11,9 @@ module ApplicationHelper
       @user = User.new
     end
   end
+  
+  def bootstrap_status_class(status)
+    status_hash = { "notice" => "info", "alert" => "danger" }
+    status_hash[status].nil? ? status : status_hash[status]
+  end
 end

@@ -1,41 +1,14 @@
-<h1><%= @user.username %>'s profile</h1>
-<%= link_to "Friends", friends_user_path(@user) %>
+<%= render "banner", active: :posts %>
 
-<%= friendship_action_links(@user) %>
-
-
-
-<%= form_for [@user, @post] do |f| %>
-  <%= f.label :post %>
-  <%= f.text_area :body %>
-  <%= f.submit :post %>
-<% end %>
-
-<h2>Posts</h2>
-<% @user.posts.each do |post| %>
-  <div>
-    <strong><%= link_to post.poster.username, post.poster %></strong>
-    <p>
-      <%= post.body %>
-    </p>
-    <%= link_to "Edit", edit_post_path(post) %> |
-    <%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure?" } %>
-    <ul>
-      <% post.comments.each do |comment| %>
-        <li>
-          <strong><%= link_to comment.user.username, comment.user %></strong>: <%= comment.body %><br />
-          <%= link_to "Edit", edit_comment_path(comment) %> |
-          <%= link_to "Delete", comment_path(comment), method: :delete, data: { confirm: "Are you sure?" } %>
-        </li>
-      <% end %>
-      <li>
-        <%= form_for [post, Comment.new] do |f| %>
-          <%= f.label :comment %>
-          <%= f.text_area :body %>
-          <%= f.submit :comment %>
-        <% end %>
-      </li>
-    </ul>
+<div class="container">
+  <div class="row">
+    
+    <div class="col-md-3">
+      <h3><%= @user.full_name %></h3>
+      <h4>@<%= @user.username %></h4>
+      <%= friendship_action_links(@user) %>
+    </div>
+    
+    <%= render "users/posts/posts" %>
   </div>
-  <br />
-<% end %>
+</div>

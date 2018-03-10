@@ -1,0 +1,3 @@
+<% flash.each do |status, message| %>
+  <%= content_tag :div, message, class: ["alert", "alert-#{bootstrap_status_class(status)}"] %>
+<% end %>

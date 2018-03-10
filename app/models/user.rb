@@ -62,6 +62,10 @@ class User < ApplicationRecord
     username
   end
   
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+  
   def self.search(query)
     return [] if query.blank?
     if query =~ /@/

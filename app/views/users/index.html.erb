@@ -1,5 +1,6 @@
-<ul>
-<% @results.each do |user| %>
-  <li><%= link_to user.username, user %></li>
-<% end %>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <%= render "shared/user_cards", collection: @results, title: "Search Results for: #{params[:q]}" %>
+  </div>
+</div>

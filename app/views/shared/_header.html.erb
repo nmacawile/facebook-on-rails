@@ -1,0 +1,56 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-links">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      
+      <div style="position: absolute; top: -5px;">
+        <%= link_to icon("fab", "facebook", class: "fa-2x"), root_url, class: "navbar-brand" %>
+        <%= link_to icon("fas", "road", class: "fa-2x"), root_url, class: "navbar-brand" %>
+      </div>
+    </div>
+    
+    <% if user_signed_in? %>
+      <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="nav-links">
+        <li>
+          <%= form_tag search_path, method: :get, enforce_utf8: false, authenticity_token: false, class: ["navbar-form", "navbar-left"] do %>
+            <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search"  %>
+              <%= submit_tag :search, name: nil, class: ["btn", "btn-primary"] %>
+          <% end %>
+        </li>
+      
+        <li><%= link_to current_user.first_name, current_user %></li>
+        <li><%= link_to "Home", root_url %></li>
+        <li><%= link_to "Friends", friends_user_path(current_user) %></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to("Settings", edit_user_registration_path) %></li>
+            <li><%= link_to('Log Out', destroy_user_session_path, method: :delete) %></li>
+          </ul>
+        </li>
+      </ul>
+    <% else %>
+      <div class="navbar-right collapse navbar-collapse" id="nav-links">
+        <%= form_for :user, url: session_path(:user), html: { class: "form-signin navbar-form" } do |f| %>
+            <%= f.label :email, class: "sr-only" %>
+            <%= f.email_field :email, class: "form-control", placeholder: "Email"  %>
+            <%= f.label :password, class: "sr-only" %>
+            <%= f.password_field :password, class: "form-control", placeholder: "Password"  %>
+          <%= f.button "Log In", class: ["btn", "btn-primary"] %>
+          <%= link_to "#{icon("fab", "google")} Log in with Google".html_safe, user_google_oauth2_omniauth_authorize_path, class: ["btn", "btn-default"] %>
+          
+        <% end %>
+        
+        
+        
+      </div>
+      
+    <% end %>
+    
+  </div>
+</nav>
