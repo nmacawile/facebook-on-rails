@@ -7,7 +7,8 @@ class Comment < ApplicationRecord
   
   default_scope { order(:id) }
   
-  validates :body, length: { maximum: 255 }
+  validates :body, presence: true,
+                   length: { maximum: 255 }
   
   def owner
     post.user

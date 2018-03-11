@@ -8,7 +8,8 @@ class Post < ApplicationRecord
   
   default_scope { order(id: :desc) }
   
-  validates :body, length: { maximum: 1000 }
+  validates :body, presence: true,
+                   length: { maximum: 1000 }
   
   def owner
     user

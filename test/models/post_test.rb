@@ -16,4 +16,9 @@ class PostTest < ActiveSupport::TestCase
     @post.body = "a" * 1001
     assert_not @post.valid?
   end
+  
+  test "should not be blank" do
+    @post.body = "   "
+    assert_not @post.valid?
+  end
 end
