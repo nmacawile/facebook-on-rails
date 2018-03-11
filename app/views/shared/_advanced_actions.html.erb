@@ -1,0 +1,12 @@
+<% if user_signed_in? && current_user == object.author || current_user == object.owner %>
+  <div class="dropdown advanced-actions">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <span class="glyphicon glyphicon-option-horizontal"></span></a>
+    <ul class="dropdown-menu">
+      <% if current_user == object.author %>
+        <li><%= link_to "Edit", send("edit_#{type}_path", object) %></li>
+      <% end %>
+      <li><%= link_to "Delete", send("#{type}_path", object), method: :delete, data: { confirm: "Are you sure?" } %></li>
+    </ul>
+  </div>
+<% end %>

@@ -18,14 +18,7 @@
         <div class="post-avatar"><img src="http://via.placeholder.com/50x50"></div>
         <span class="post-user-link"><strong><%= link_to post.poster.full_name, post.poster %></strong> <%= "@#{post.poster.username}" %></span>
         <span class="time"><%= time_ago_in_words(post.created_at) %></span>
-        <span class="dropdown post-actions">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <span class="glyphicon glyphicon-option-horizontal"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "Edit", edit_post_path(post) %></li>
-            <li><%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure?" } %></li>
-          </ul>
-        </span>
+        <%= render "shared/advanced_actions", type: "post", object: post %>
         <span class="post-content">
           <%= simple_format(post.body) %>
           <div class="post-interactions">

@@ -8,4 +8,12 @@ class Comment < ApplicationRecord
   default_scope { order(:id) }
   
   validates :body, length: { maximum: 255 }
+  
+  def owner
+    post.user
+  end
+  
+  def author
+    user
+  end
 end

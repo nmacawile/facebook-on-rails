@@ -9,4 +9,12 @@ class Post < ApplicationRecord
   default_scope { order(id: :desc) }
   
   validates :body, length: { maximum: 1000 }
+  
+  def owner
+    user
+  end
+  
+  def author
+    poster
+  end
 end
