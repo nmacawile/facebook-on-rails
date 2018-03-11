@@ -1,0 +1,2 @@
+$('#comment_<%= @comment.id %> .comment-btn-like').replaceWith("<%=j comment_toggleable_like_button @comment %>");
+$('#comment_<%= @comment.id %> .comment-likes-count').html("<%=j likes_count @comment %>");

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305042347) do
+ActiveRecord::Schema.define(version: 20180310023325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,18 @@ ActiveRecord::Schema.define(version: 20180305042347) do
     t.index ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
     t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_friendships_on_user_id", using: :btree
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "liker_id"
+    t.integer  "likeable_id"
+    t.string   "likeable_type", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["likeable_id", "liker_id", "likeable_type"], name: "index_likes_on_likeable_id_and_liker_id_and_likeable_type", unique: true, using: :btree
+    t.index ["likeable_id"], name: "index_likes_on_likeable_id", using: :btree
+    t.index ["likeable_type"], name: "index_likes_on_likeable_type", using: :btree
+    t.index ["liker_id"], name: "index_likes_on_liker_id", using: :btree
   end
 
   create_table "posts", force: :cascade do |t|
@@ -86,6 +98,7 @@ ActiveRecord::Schema.define(version: 20180305042347) do
   add_foreign_key "friend_requests", "users", column: "friend_id"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
+  add_foreign_key "likes", "users", column: "liker_id"
   add_foreign_key "posts", "users"
   add_foreign_key "posts", "users", column: "poster_id"
 end

@@ -14,7 +14,7 @@
     </li>
     
     <% @user.posts.each do |post| %>
-      <li class="post">
+      <li class="post" id=<%= "post_#{post.id}" %>>
         <div class="post-avatar"><img src="http://via.placeholder.com/50x50"></div>
         <span class="post-user-link"><strong><%= link_to post.poster.full_name, post.poster %></strong> <%= "@#{post.poster.username}" %></span>
         <span class="time"><%= time_ago_in_words(post.created_at) %></span>
@@ -29,8 +29,8 @@
         <span class="post-content">
           <%= simple_format(post.body) %>
           <div class="post-interactions">
-            <%= link_to "#{icon("far", "thumbs-up")} Like".html_safe, "#", class: "btn-default btn btn-like" %>
-            <small class="likes-count">122</small>
+            <%= post_toggleable_like_button(post) if user_signed_in? %>
+            <small class="post-likes-count"><%= likes_count post %></small>
           </div>
         </span>
         

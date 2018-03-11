@@ -29,7 +29,19 @@ class User < ApplicationRecord
                                       dependent: :destroy
   has_many :friends_to_confirm, through: :friend_requests_received,
                                 source: :user
-         
+                                
+  has_many :likings, class_name: "Like",
+                     foreign_key: :liker_id,
+                     dependent: :destroy
+
+  has_many :posts_liked, through: :likings,
+                         source: :likeable,
+                         source_type: "Post"
+  
+  has_many :comments_liked, through: :likings,
+                            source: :likeable,
+                            source_type: "Comment"
+  
   validates :last_name, presence: true,
                         length: { maximum: 50 }
   validates :first_name, presence: true,

@@ -1,0 +1,10 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+like1:
+  liker: user5
+  likeable: post2
+  likeable_type: "Post"
+  
+like2:
+  liker: user5
+  likeable: comment1
+  likeable_type: "Comment"

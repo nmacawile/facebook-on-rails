@@ -16,4 +16,9 @@ module ApplicationHelper
     status_hash = { "notice" => "info", "alert" => "danger" }
     status_hash[status].nil? ? status : status_hash[status]
   end
+  
+  def toggleable_button(icon_css, title, url, options = {})
+    title_with_icon = "#{icon(*icon_css)} #{title}".html_safe
+    link_to(title_with_icon, url, options)
+  end
 end

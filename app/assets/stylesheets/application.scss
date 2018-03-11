@@ -115,17 +115,9 @@ body {
 
 .comment-interactions {
   margin: 2px 5px 8px;
-  a:link {
+  .comment-btn-like {
     font-size: 12px;
   }
-}
-
-.likes-count {
-  display: inline-block;
-  border-radius: 5px;
-  color: black;
-  padding: 2px;
-  background-color: rgb(240, 240, 240);
 }
 
 .post-text-area {
@@ -140,7 +132,7 @@ body {
 
 .post-interactions {
   margin: 2px 0;
-  .btn-like {
+  .post-btn-like {
     padding: 2px 5px;
     font-size: 13px
   }

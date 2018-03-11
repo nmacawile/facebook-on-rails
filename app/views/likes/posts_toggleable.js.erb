@@ -1,0 +1,2 @@
+$('#post_<%= @post.id %> .post-btn-like').replaceWith("<%=j post_toggleable_like_button @post %>");
+$('#post_<%= @post.id %> .post-likes-count').html("<%=j likes_count @post %>");

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
        get "received"
      end
   end
+  post "likes/:likeable_type/:likeable_id", to: "likes#like", as: "like"
+  delete "likes/:likeable_type/:likeable_id", to: "likes#unlike", as:"unlike"
   get "/search", to: "users#index"
   devise_for :users, controllers: { registrations: "users/registrations",
                                     omniauth_callbacks: 'users/omniauth_callbacks' }

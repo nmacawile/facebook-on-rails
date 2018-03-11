@@ -1,6 +1,6 @@
 <ul class="comments">
   <% post.comments.each do |comment| %>
-    <li>
+    <li id="comment_<%= comment.id %>">
       <span class="comment-avatar"><img src="http://via.placeholder.com/32x32"></span>
       <div class="comment-wrapper">
         <div class="comment-body">
@@ -17,8 +17,8 @@
           <strong><%= link_to comment.user.full_name, comment.user %></strong> <%= comment.body %>
         </div>
         <div class="comment-interactions">
-         <%= link_to icon("far", "thumbs-up"), "#" %> <small class="likes-count">210</small>
-         <span style="float:right"><%= time_ago_in_words(comment.created_at) %></span>
+          <%= comment_toggleable_like_button(comment) if user_signed_in? %> <small class="comment-likes-count"><%= likes_count(comment) %></small>
+          <span style="float:right"><%= time_ago_in_words(comment.created_at) %></span>
         </div>
       </div>
       
