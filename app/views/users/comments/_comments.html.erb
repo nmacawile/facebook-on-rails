@@ -1,6 +1,6 @@
 <ul class="comments">
   <% post.comments.each do |comment| %>
-    <li id="comment_<%= comment.id %>">
+    <li id="comment_<%= comment.id %>" class="comment">
       <span class="comment-avatar"><img src="http://via.placeholder.com/32x32"></span>
       <div class="comment-wrapper">
         <div class="comment-body">
@@ -25,16 +25,22 @@
     </li>
   <% end %>
   
-  <%= form_for [post, Comment.new] do |f| %>
-  <li>
-    <span class="comment-avatar"><img src="http://via.placeholder.com/32x32"></span>
-    <div class="comment-form">
-      <div class="form-group">
-        <%= f.text_field :body, placeholder: "Comment on this post...", class: "form-control" %>
-      </div>
-      <%= f.submit "Comment", class: ["btn", "btn-primary"] %>
-    </div>
-  </li>
+  <% if user_signed_in? %>
+    <li>
+      <%= form_for [post, Comment.new] do |f| %>
+        <span class="comment-avatar"><img src="http://via.placeholder.com/32x32"></span>
+        <div class="comment-form">
+          <div class="input-group">
+            <%= f.text_field :body, placeholder: "Comment on this post...", class: "form-control" %>
+            <span class="input-group-btn">
+              <%= button_tag class: ["btn", "btn-default", "comment-btn"] do %>
+                <%= icon("far", "comment-alt") %>
+              <% end %>
+            </span>
+          </div>
+        </div>
+      <% end %>
+    </li>
   <% end %>
   
 </ul>
