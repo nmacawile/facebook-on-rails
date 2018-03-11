@@ -125,6 +125,11 @@ body {
   }
 }
 
+.comment-timestamp {
+  float: right;
+  color: #657786;
+}
+
 .comment-btn {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -152,6 +157,13 @@ body {
   color: #657786;
 }
 
+.timestamp {
+  color: #657786;
+  &:before {
+    content: "\00b7";
+  }
+}
+
 .post-content {
   display: block;
   word-wrap: break-word;
@@ -159,6 +171,10 @@ body {
   .post-actions {
     display: block;
   }
+}
+
+.post-body {
+  min-height: 40px;
 }
 
 .post-avatar {

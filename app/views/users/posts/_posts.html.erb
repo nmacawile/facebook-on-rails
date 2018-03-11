@@ -1,26 +1,27 @@
 <div class="col-md-7 posts-container">
   <ul class="posts">
-    <li class="post">
-      <%= form_for [@user, Post.new], class: "form-group" do |f| %>
-        <div class="form-group">
-          <% placeholder = current_user == @user ? "What's on your mind, #{@user.first_name}?" : "Write something to #{@user.first_name}." %>
-
-          <%= f.text_area :body, class: ["form-control", "post-text-area"], placeholder: placeholder %>
-        </div>
-        <div class="text-right">
-          <%= f.submit "Post", class: "btn btn-primary" %>
-        </div>
-      <% end %>
-    </li>
-    
+    <% if user_signed_in? && current_user.friends_with?(@user) || current_user == @user %>
+      <li class="post">
+        <%= form_for [@user, Post.new], class: "form-group" do |f| %>
+          <div class="form-group">
+            <% placeholder = current_user == @user ? "What's on your mind, #{@user.first_name}?" : "Write something to #{@user.first_name}." %>
+  
+            <%= f.text_area :body, class: ["form-control", "post-text-area"], placeholder: placeholder %>
+          </div>
+          <div class="text-right">
+            <%= f.submit "Post", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
     <% @user.posts.each do |post| %>
       <li class="post" id=<%= "post_#{post.id}" %>>
         <div class="post-avatar"><img src="http://via.placeholder.com/50x50"></div>
         <span class="post-user-link"><strong><%= link_to post.poster.full_name, post.poster %></strong> <%= "@#{post.poster.username}" %></span>
-        <span class="time"><%= time_ago_in_words(post.created_at) %></span>
+        <span class="timestamp"> <%= time_ago_in_words(post.created_at) %> ago</span>
         <%= render "shared/advanced_actions", type: "post", object: post %>
         <span class="post-content">
-          <%= simple_format(post.body) %>
+          <div class="post-body"><%= simple_format(post.body) %></div>
           <div class="post-interactions">
             <%= post_toggleable_like_button(post) if user_signed_in? %>
             <small class="post-likes-count"><%= likes_count post %></small>

@@ -9,14 +9,14 @@
         </div>
         <div class="comment-interactions">
           <%= comment_toggleable_like_button(comment) if user_signed_in? %> <small class="comment-likes-count"><%= likes_count(comment) %></small>
-          <span style="float:right"><%= time_ago_in_words(comment.created_at) %></span>
+          <span class="comment-timestamp"><%= time_ago_in_words(comment.created_at) %> ago</span>
         </div>
       </div>
       
     </li>
   <% end %>
   
-  <% if user_signed_in? %>
+  <% if user_signed_in? && current_user.friends_with?(@user) || current_user == @user %>
     <li>
       <%= form_for [post, Comment.new] do |f| %>
         <span class="comment-avatar"><img src="http://via.placeholder.com/32x32"></span>
