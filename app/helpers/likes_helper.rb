@@ -13,14 +13,14 @@ module LikesHelper
                          method: :post,
                          class: 'btn-default' } }
     
-    toggleable_button([matrix[mode][:style], 'thumbs-up'],
-                      'Like', 
-                      matrix[mode][:path], 
-                      {
-                        method: matrix[mode][:method],
-                        remote: true,
-                        class: "post-btn-like btn #{matrix[mode][:class]}",
-                      })
+    link_with_icon([matrix[mode][:style], 'thumbs-up'],
+                   'Like', 
+                   matrix[mode][:path], 
+                   {
+                     method: matrix[mode][:method],
+                     remote: true,
+                     class: "post-btn-like btn #{matrix[mode][:class]}",
+                   })
   end
   
   def comment_toggleable_like_button(comment)
