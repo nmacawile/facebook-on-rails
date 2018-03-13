@@ -14,6 +14,7 @@
     </div>
     
     <% if user_signed_in? %>
+    
       <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="nav-links">
         <li>
           <%= form_tag search_path, method: :get, enforce_utf8: false, authenticity_token: false, class: ["navbar-form", "navbar-left"] do %>
@@ -22,19 +23,32 @@
           <% end %>
         </li>
       
-        <li><%= link_to current_user.first_name, current_user %></li>
-        <li><%= link_to "Home", root_url %></li>
-        <li><%= link_to "Friends", friends_user_path(current_user) %></li>
+        <li><%= link_to icon("fas", "user-circle") << " ".html_safe << current_user.first_name, current_user %></li>
+        <li><%= link_to icon("fas", "home") << " Home", root_url %></li>
+        <li><%= link_to icon("fas", "users") << " Friends", friends_user_path(current_user) %></li>
+        
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown"  href="#">
+            <%= icon("fas", "user-plus") %>
+            Friend Requests
+          <ul class="dropdown-menu">
+            <li><%= link_to("Sent", sent_friend_requests_path) %></li>
+            <li><%= link_to('Recieved', received_friend_requests_path) %></li>
+          </ul>
+        </li>
+        
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><%= link_to("Settings", edit_user_registration_path) %></li>
-            <li><%= link_to('Log Out', destroy_user_session_path, method: :delete) %></li>
+            <li><%= link_to icon("fas", "cog") << " Settings", edit_user_registration_path %></li>
+            <li><%= link_to icon("fas", "sign-out-alt") << " Log Out", destroy_user_session_path, method: :delete %></li>
           </ul>
         </li>
       </ul>
+      
     <% else %>
+    
       <div class="navbar-right collapse navbar-collapse" id="nav-links">
         <%= form_for :user, url: session_path(:user), html: { class: "form-signin navbar-form" } do |f| %>
             <%= f.label :email, class: "sr-only" %>
@@ -43,13 +57,8 @@
             <%= f.password_field :password, class: "form-control", placeholder: "Password"  %>
           <%= f.button "Log In", class: ["btn", "btn-primary"] %>
           <%= link_to "#{icon("fab", "google")} Log in with Google".html_safe, user_google_oauth2_omniauth_authorize_path, class: ["btn", "btn-default"] %>
-          
         <% end %>
-        
-        
-        
       </div>
-      
     <% end %>
     
   </div>

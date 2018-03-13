@@ -9,11 +9,14 @@
     <div class="col-md-3 col-sm-4 avatar-container">
       <div class="avatar-main"><img src="http://via.placeholder.com/200x200"></div>
     </div>
-    <div>
-      <ul class="nav navbar-nav col-sm-8 col-md-9">
+    <div class="col-sm-8 col-md-7">
+      <ul class="nav navbar-nav">
         <li <%= 'class=active' if active == :posts %>><%= link_to "Posts", user_path(@user) %></li>
         <li <%= 'class=active' if active == :friends %>><%= link_to "Friends", friends_user_path(@user) %></li>
       </ul>
+      <div class="navbar-right navbar-form"> 
+        <%= friendship_action_links(@user) %>
+      </div>
     </div>
   </div>
 </div>
