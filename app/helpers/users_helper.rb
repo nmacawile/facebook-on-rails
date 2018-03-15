@@ -40,4 +40,8 @@ module UsersHelper
   
     end
   end
+  
+  def avatar_link(user, version, path = user)
+    link_to image_tag(user.avatar_url(version)), path
+  end
 end

@@ -2,7 +2,9 @@
   <div class="row">
     <div class="col-md-3 home-panel">
         
-      <div class="home-avatar"><img src="http://via.placeholder.com/150x150"></div>
+      <div class="home-avatar">
+        <%= avatar_link current_user, :home_display, avatar_path %>
+      </div>
       
       <div class="home-panel-controls">
           <h4><%= @user.full_name %></h4>

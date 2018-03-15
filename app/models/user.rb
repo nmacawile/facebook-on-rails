@@ -1,9 +1,13 @@
+require 'uri_validator'
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
+  
+  mount_uploader :avatar, AvatarUploader
          
   has_many :posts, dependent: :destroy
   has_many :posts_authored, class_name: "Post",
@@ -52,6 +56,11 @@ class User < ApplicationRecord
                        length: { maximum: 20 },
                        format: { with: /\A[\w]+\z/},
                        uniqueness: { case_sensitive: false }
+                       
+  validates :remote_avatar_url, allow_blank: true,
+                                uri: { 
+                                  format: /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
+                                }
   
   enum gender: [:male, :female, :other, :not_telling]
   

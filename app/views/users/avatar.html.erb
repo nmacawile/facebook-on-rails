@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+    <h1><%= @user.full_name %></h1>
+    <div class="main-avatar-container"> 
+      <%= avatar_link @user, :full, @user.avatar_url %>
+    </div>
+    <%= link_to "Back to #{@user.full_name}'s page", @user %>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+    <h1><%= current_user.full_name %></h1>
+    <div class="main-avatar-container">
+      <%= avatar_link current_user, :full, current_user.avatar_url %>
+    </div>
+    <%= form_for :avatar, method: :put do |f| %>
+      <%= f.label :upload %>
+      <%= f.file_field :local, class: "form-control" %>
+      <%= "or" %>
+      <div class="form-group">
+        <%= f.label :url %>
+        <%= f.text_field :remote, class: "form-control", placeholder: "example: https://path.to/image.jpg" %>
+      </div>
+      <%= f.submit "Upload", class: "btn btn-block btn-primary" %>
+    <% end %>
+    <%= link_to "Back to Home Page", root_url %>
+  </div>
+</div>

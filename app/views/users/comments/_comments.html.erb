@@ -1,7 +1,9 @@
 <ul class="comments">
   <% post.comments.each do |comment| %>
     <li id="comment_<%= comment.id %>" class="comment">
-      <span class="comment-avatar"><img src="http://via.placeholder.com/32x32"></span>
+      <span class="comment-avatar">
+        <%= avatar_link comment.user, :comment_thumb %>
+      </span>
       <div class="comment-wrapper">
         <div class="comment-body">
           <%= render "shared/advanced_actions", type: "comment", object: comment %>
@@ -19,7 +21,9 @@
   <% if user_signed_in? && current_user.friends_with?(@user) || current_user == @user %>
     <li>
       <%= form_for [post, Comment.new] do |f| %>
-        <span class="comment-avatar"><img src="http://via.placeholder.com/32x32"></span>
+        <span class="comment-avatar">
+          <%= image_tag current_user.avatar_url(:comment_thumb) %>
+        </span>
         <div class="comment-form">
           <div class="input-group">
             <%= f.text_field :body, placeholder: "Comment on this post...", class: "form-control" %>

@@ -5,8 +5,12 @@
   <ul class="user-cards">
     <% collection.each do |user| %>
       <li class="user-card">
-        <div class="friend-btn-container"><%= friendship_action_links(user) %></div>
-        <div class="user-card-avatar"><img src="http://via.placeholder.com/50x50"></div>
+        <div class="friend-btn-container">
+          <%= friendship_action_links(user) %>
+        </div>
+        <div class="user-card-avatar">
+          <%= avatar_link user, :post_thumb %>
+        </div>
         <span class="user-card-name"><strong><%= link_to user.full_name, user %></strong><br />
         <%= "@#{user.username}" %></span>
       </li>

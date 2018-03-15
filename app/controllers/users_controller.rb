@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_action :load_user, only: [:show, :friends]
+  before_action :load_user, only: [:show, :friends, :avatar]
   
   def show
     @post = Post.new
@@ -18,6 +18,9 @@ class UsersController < ApplicationController
       @friends_pending = current_user.friends_pending
     end
     
+  end
+  
+  def avatar
   end
   
   private

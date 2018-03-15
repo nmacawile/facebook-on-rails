@@ -18,3 +18,7 @@
 
 # Ignore application configuration
 /config/application.yml
+
+
+# Temporary images
+/public/uploads/tmp/*

@@ -6,8 +6,10 @@ Rails.application.routes.draw do
     end
     member do
       get 'friends'
+      get 'avatar'
     end
   end
+  resource :avatar, only: [:update, :show]
   resources :friendships, only: [:create, :destroy]
   resources :friend_requests, only: [:create, :destroy] do
      collection do

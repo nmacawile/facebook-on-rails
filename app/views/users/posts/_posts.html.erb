@@ -16,7 +16,9 @@
     <% end %>
     <% @user.posts.each do |post| %>
       <li class="post" id=<%= "post_#{post.id}" %>>
-        <div class="post-avatar"><img src="http://via.placeholder.com/50x50"></div>
+        <div class="post-avatar">
+          <%= avatar_link post.poster, :post_thumb %>
+        </div>
         <span class="post-user-link"><strong><%= link_to post.poster.full_name, post.poster %></strong> <%= "@#{post.poster.username}" %></span>
         <span class="timestamp"> <%= time_ago_in_words(post.created_at) %> ago</span>
         <%= render "shared/advanced_actions", type: "post", object: post %>

@@ -7,7 +7,9 @@
 <div class="navbar navbar-default profile-nav">
   <div class="container">
     <div class="col-md-3 col-sm-4 avatar-container">
-      <div class="avatar-main"><img src="http://via.placeholder.com/200x200"></div>
+      <div class="avatar-main">
+        <%= avatar_link @user, :banner_display, avatar_user_path(@user) %>
+      </div>
     </div>
     <div class="col-sm-8 col-md-7">
       <ul class="nav navbar-nav">
