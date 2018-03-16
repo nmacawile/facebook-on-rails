@@ -26,7 +26,7 @@
         </span>
         <div class="comment-form">
           <div class="input-group">
-            <%= f.text_field :body, placeholder: "Comment on this post...", class: "form-control" %>
+            <%= f.text_field :body, placeholder: "Comment on this post...", class: "form-control", autocomplete: :off %>
             <span class="input-group-btn">
               <%= button_tag class: ["btn", "btn-default", "comment-btn"], data: { disable_with: icon("fas", "spinner", class: "fa-spin") } do %>
                 <%= icon("far", "comment-alt") %>
