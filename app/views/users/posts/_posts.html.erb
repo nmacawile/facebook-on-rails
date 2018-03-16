@@ -14,12 +14,17 @@
         <% end %>
       </li>
     <% end %>
-    <% @user.posts.each do |post| %>
+    <% @posts.each do |post| %>
       <li class="post" id=<%= "post_#{post.id}" %>>
         <div class="post-avatar">
           <%= avatar_link post.poster, :post_thumb %>
         </div>
-        <span class="post-user-link"><strong><%= link_to post.poster.full_name, post.poster %></strong> <%= "@#{post.poster.username}" %></span>
+        <span class="post-user-link"><strong><%= link_to post.poster.full_name, post.poster %></strong>
+          <% if post.poster != post.user %>
+            <%= icon("fas", "caret-right") %>
+            <strong><%= link_to post.user.full_name, post.user %></strong>
+          <% end %>
+        </span>
         <span class="timestamp"> <%= time_ago_in_words(post.created_at) %> ago</span>
         <%= render "shared/advanced_actions", type: "post", object: post %>
         <span class="post-content">

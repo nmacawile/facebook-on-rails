@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :load_user, only: [:show, :friends, :avatar]
   
   def show
-    @post = Post.new
+    @posts = @user.posts
   end
   
   def index

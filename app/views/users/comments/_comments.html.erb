@@ -18,7 +18,7 @@
     </li>
   <% end %>
   
-  <% if user_signed_in? && current_user.friends_with?(@user) || current_user == @user %>
+  <% if user_signed_in? && current_user.friends_with?(post.user) || current_user == post.user %>
     <li>
       <%= form_for [post, Comment.new] do |f| %>
         <span class="comment-avatar">
