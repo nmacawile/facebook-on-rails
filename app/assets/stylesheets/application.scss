@@ -5,6 +5,16 @@
 
 body {
   background-color: rgb(230, 230, 230);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.active {
+  font-weight: bold;
+  border-bottom: 4px solid #777777;
 }
 
 .alert {

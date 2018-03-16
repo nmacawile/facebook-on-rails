@@ -7,10 +7,7 @@
         <span class="icon-bar"></span> 
       </button>
       
-      <div style="position: absolute; top: -5px;">
-        <%= link_to icon("fab", "facebook", class: "fa-2x"), root_url, class: "navbar-brand" %>
-        <%= link_to icon("fas", "road", class: "fa-2x"), root_url, class: "navbar-brand" %>
-      </div>
+      <%= link_to icon("fab", "facebook") << " Facebook on Rails", root_url, class: "navbar-brand" %>
     </div>
     
     <% if user_signed_in? %>
