@@ -4,7 +4,6 @@
     <div class="col-md-3">
       <h3><%= @user.full_name %></h3>
       <h4>@<%= @user.username %></h4>
-      <%= friendship_action_links(@user) %>
     </div>
     <%= render "shared/user_cards", collection: @user.friends, title: "" %>
   </div>

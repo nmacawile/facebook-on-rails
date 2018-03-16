@@ -11,22 +11,25 @@
           <h5>@<%= @user.username %></h5>
          <ul>
            <li>
-               Change Avatar
+               <%= link_to "Change Avatar", avatar_path %>
            </li>
            <li>
-               Edit Profile
+               <%= link_to "Change Banner", banner_path %>
            </li>
            <li>
-               Friend Requests
+               <%= link_to "Edit Profile", edit_user_registration_path %>
            </li>
            <li>
-               Friend Requests Sent
+               <%= link_to "Friend Requests Received", received_friend_requests_path %>
            </li>
            <li>
-               Account Settings
+               <%= link_to "Friend Requests Sent", sent_friend_requests_path %>
            </li>
            <li>
-               Log Out
+               <%= link_to "Account Settings", edit_user_registration_path %>
+           </li>
+           <li>
+               <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
            </li>
          </ul>
       </div>

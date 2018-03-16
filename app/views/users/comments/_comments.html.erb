@@ -22,7 +22,7 @@
     <li>
       <%= form_for [post, Comment.new] do |f| %>
         <span class="comment-avatar">
-          <%= image_tag current_user.avatar_url(:comment_thumb) %>
+          <%= avatar_link current_user, :comment_thumb %>
         </span>
         <div class="comment-form">
           <div class="input-group">

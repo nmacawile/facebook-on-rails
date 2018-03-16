@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
   end
   resource :avatar, only: [:update, :show]
+  resource :banner, only: [:update, :show]
   resources :friendships, only: [:create, :destroy]
   resources :friend_requests, only: [:create, :destroy] do
      collection do

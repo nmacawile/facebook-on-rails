@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:google_oauth2]
   
   mount_uploader :avatar, AvatarUploader
+  mount_uploader :banner, BannerUploader
          
   has_many :posts, dependent: :destroy
   has_many :posts_authored, class_name: "Post",
@@ -58,6 +59,11 @@ class User < ApplicationRecord
                        uniqueness: { case_sensitive: false }
                        
   validates :remote_avatar_url, allow_blank: true,
+                                uri: { 
+                                  format: /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
+                                }
+                                
+  validates :remote_banner_url, allow_blank: true,
                                 uri: { 
                                   format: /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
                                 }

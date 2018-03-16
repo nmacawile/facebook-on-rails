@@ -27,7 +27,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
   
   def default_public_id
-    ENV["PLACEHOLDER_IMG_CLOUDINARY_ID"]
+    ENV["AVATAR_PLACEHOLDER_CLOUDINARY_ID"]
     # http://res.cloudinary.com/xxxx/image/upload/v1521091067/abcdefghijkl.jpg
     # public_id: abcdefghijkl
   end
