@@ -94,7 +94,7 @@ class User < ApplicationRecord
   end
   
   def self.search(query)
-    return [] if query.blank?
+    return User.none if query.blank?
     if query =~ /@/
       where(email: query)
     else

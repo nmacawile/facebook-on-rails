@@ -3,15 +3,19 @@ class UsersController < ApplicationController
   before_action :load_user, only: [:show, :friends, :avatar]
   
   def show
-    @posts = @user.posts
+    @posts = @user.posts.paginate(page: params[:page], per_page: 10)
+    respond_to do |format|
+      format.html
+      format.js { render "posts/posts"}
+    end
   end
   
   def index
-    @results = User.search(params[:q])
+    @users = User.search(params[:q]).paginate(page: params[:page], per_page: 10)
   end
   
   def friends
-    @friends = @user.friends
+    @users = @user.friends.paginate(page: params[:page], per_page: 10)
     
     if @user == current_user
       @friends_to_confirm = current_user.friends_to_confirm

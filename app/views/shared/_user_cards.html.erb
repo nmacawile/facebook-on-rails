@@ -3,7 +3,7 @@
     <h2><%= title %></h2>
   <% end %>
   <ul class="user-cards">
-    <% collection.each do |user| %>
+    <% @users.each do |user| %>
       <li class="user-card">
         <div class="friend-btn-container">
           <%= friendship_action_links(user) %>
@@ -16,5 +16,6 @@
       </li>
     <% end %>
   </ul>
+  <%= will_paginate @users %>
 </div>
     

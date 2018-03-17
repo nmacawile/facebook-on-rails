@@ -20,7 +20,7 @@ class FriendRequestsController < ApplicationController
   end
 
   def destroy
-  	if current_user == @requestee
+    if current_user == @requestee
       @friend_request.destroy
   	  flash[:notice] = "You have rejected the friend request."
   	elsif current_user == @requester
@@ -30,6 +30,14 @@ class FriendRequestsController < ApplicationController
       flash[:danger] = "You are not authorized to do that."
     end
     redirect_to @requestee
+  end
+  
+  def received
+    @users = current_user.friends_to_confirm.paginate(page: params[:page], per_page: 10)
+  end
+  
+  def sent
+    @users = current_user.friends_pending.paginate(page: params[:page], per_page: 10)
   end
 
   private  
