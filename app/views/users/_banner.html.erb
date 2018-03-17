@@ -6,19 +6,19 @@
 
 <div class="navbar navbar-default profile-nav">
   <div class="container">
-    <div class="col-md-3 col-sm-4 avatar-container">
+    <div class="col-xs-4 col-md-3 col-sm-4 avatar-container">
       <div class="avatar-main">
         <%= avatar_link @user, :banner_display, avatar_user_path(@user) %>
       </div>
     </div>
-    <div class="col-sm-8 col-md-7">
-      <ul class="nav navbar-nav">
+    <div class="col-xs-7 col-sm-8 col-md-7">
+      <div class="navbar-form navbar-right"> 
+        <%= friendship_action_links(@user) %>
+      </div>
+      <ul class="nav navbar-nav banner-nav">
         <li <%= 'class=active' if active == :posts %>><%= link_to "Posts", user_path(@user) %></li>
         <li <%= 'class=active' if active == :friends %>><%= link_to "Friends", friends_user_path(@user) %></li>
       </ul>
-      <div class="navbar-right navbar-form"> 
-        <%= friendship_action_links(@user) %>
-      </div>
     </div>
   </div>
 </div>
