@@ -1,7 +1,6 @@
 $('.posts').append('<%= j render @posts %>');
 <% if @posts.next_page %>
-  $('.pagination').replaceWith('<%= j will_paginate @posts %>');
+  $('.next_page').html('<%= j link_to_next_page %>');
 <% else %>
-  $(window).off('scroll');
-  $('.pagination').remove();
+  $('.next_page').remove();
 <% end %>

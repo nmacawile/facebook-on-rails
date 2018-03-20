@@ -16,7 +16,11 @@
     <% end %>
     <%= render @posts %>
   </ul>
-  <div id="infinite-scrolling">
-    <%= will_paginate @posts %>
-  </div>
+
+  <% if @posts.next_page %>
+    <div class="next_page">
+      <%= link_to_next_page %>
+    </div>
+  <% end %>
+  
 </div>
