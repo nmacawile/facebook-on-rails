@@ -2,6 +2,10 @@ class UsersController < ApplicationController
   
   before_action :load_user, only: [:show, :friends, :avatar]
   
+  def index
+    @users = User.paginate(page: params[:page], per_page: 10)
+  end
+  
   def show
     @posts = @user.posts.paginate(page: params[:page], per_page: 10)
     respond_to do |format|
@@ -10,7 +14,7 @@ class UsersController < ApplicationController
     end
   end
   
-  def index
+  def search
     @users = User.search(params[:q]).paginate(page: params[:page], per_page: 10)
   end
   
