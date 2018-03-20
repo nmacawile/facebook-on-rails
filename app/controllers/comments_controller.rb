@@ -1,12 +1,16 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :load_post, only: :create
+  before_action :authenticate_user!, except: :index
+  before_action :load_post, only: [:index, :create]
   before_action :page_owner_or_friend_only, only: :create
   before_action :load_comment, only: [:edit, :update, :destroy]
   before_action :load_page_owner, only: [:edit, :update, :destroy]
   before_action :commenter_or_page_owner_only, only: :destroy
   before_action :commenter_only, only: [:edit, :update]
   before_action :check_if_owner_or_still_friends, only: [:edit, :update]
+  
+  def index
+    @comments = @post.comments
+  end
   
   def edit
   end
@@ -15,11 +19,17 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
-      flash[:success] = "Comment created."
+      respond_to do |format|
+        format.html {
+          flash[:success] = "Comment created."
+          redirect_to @post.user
+        }
+        format.js
+      end
     else
       flash[:danger] = "Failed to create a comment."
+      redirect_to @post.user
     end
-    redirect_to @post.user
   end
   
   def update
@@ -33,8 +43,13 @@ class CommentsController < ApplicationController
   
   def destroy
     @comment.destroy
-    flash[:notice] = "The comment has been deleted."
-    redirect_to @page_owner
+    respond_to do |format|
+      format.html { 
+        flash[:notice] = "The comment has been deleted." 
+        redirect_to @page_owner
+      }
+      format.js
+    end
   end
   
   private

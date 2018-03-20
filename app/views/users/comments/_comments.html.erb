@@ -1,41 +1,13 @@
-<ul class="comments">
-  <% post.comments.each do |comment| %>
-    <li id="comment_<%= comment.id %>" class="comment">
-      <span class="comment-avatar">
-        <%= avatar_link comment.user, :comment_thumb %>
-      </span>
-      <div class="comment-wrapper">
-        <div class="comment-body">
-          <%= render "shared/advanced_actions", type: "comment", object: comment %>
-          <strong><%= link_to comment.user.full_name, comment.user %></strong> <%= comment.body %>
-        </div>
-        <div class="comment-interactions">
-          <%= comment_toggleable_like_button(comment) if user_signed_in? %> <small class="comment-likes-count"><%= likes_count(comment) %></small>
-          <span class="comment-timestamp"><%= time_ago_in_words(comment.created_at) %> ago</span>
-        </div>
-      </div>
-      
-    </li>
+<ul class="comments comments-display">
+  <% comments_count = post.comments.count %> 
+  <% if comments_count > 3 %>
+    <%= content_tag :li, link_to("Load all comments (#{comments_count})", post_comments_path(post), remote: true, class: "load-comments"), style: "text-align: center;" %>
   <% end %>
-  
-  <% if user_signed_in? && current_user.friends_with?(post.user) || current_user == post.user %>
-    <li>
-      <%= form_for [post, Comment.new] do |f| %>
-        <span class="comment-avatar">
-          <%= avatar_link current_user, :comment_thumb %>
-        </span>
-        <div class="comment-form">
-          <div class="input-group">
-            <%= f.text_field :body, placeholder: "Comment on this post...", class: "form-control", autocomplete: :off %>
-            <span class="input-group-btn">
-              <%= button_tag class: ["btn", "btn-default", "comment-btn"], data: { disable_with: icon("fas", "spinner", class: "fa-spin") } do %>
-                <%= icon("far", "comment-alt") %>
-              <% end %>
-            </span>
-          </div>
-        </div>
-      <% end %>
-    </li>
-  <% end %>
-  
+  <%= render post.comments.last(3) %>
 </ul>
+
+<% if user_signed_in? && current_user.friends_with?(post.user) || current_user == post.user %>
+  <div class="comments">
+    <%= render "comments/comment_form", post: post %>
+  </div>
+<% end %>

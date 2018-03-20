@@ -6,7 +6,7 @@
       <% if current_user == object.author %>
         <li><%= link_to "Edit", send("edit_#{type}_path", object) %></li>
       <% end %>
-      <li><%= link_to "Delete", send("#{type}_path", object), method: :delete, data: { confirm: "Are you sure?" } %></li>
+      <li><%= link_to "Delete", send("#{type}_path", object), method: :delete, remote: true, data: { confirm: "Are you sure?" } %></li>
     </ul>
   </div>
 <% end %>
