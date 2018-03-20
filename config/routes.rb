@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get 'avatar'
     end
   end
+  get "users", to: "users#index", as: :users
   resource :avatar, only: [:update, :show]
   resource :banner, only: [:update, :show]
   resources :friendships, only: [:create, :destroy]
@@ -20,7 +21,7 @@ Rails.application.routes.draw do
   end
   post "likes/:likeable_type/:likeable_id", to: "likes#like", as: "like"
   delete "likes/:likeable_type/:likeable_id", to: "likes#unlike", as:"unlike"
-  get "/search", to: "users#index"
+  get "/search", to: "users#search"
   devise_for :users, controllers: { registrations: "users/registrations",
                                     omniauth_callbacks: 'users/omniauth_callbacks' }
 end
