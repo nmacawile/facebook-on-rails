@@ -11,7 +11,7 @@
   <span class="timestamp"> <%= time_ago_in_words(post.created_at) %> ago</span>
   <%= render "shared/advanced_actions", type: "post", object: post %>
   <span class="post-content">
-    <div class="post-body"><%= simple_format(post.body) %></div>
+    <div class="post-body"><%= auto_link post.body, html: { target: '_blank' } %></div>
     <div class="post-interactions">
       <%= post_toggleable_like_button(post) if user_signed_in? %>
       <small class="post-likes-count"><%= likes_count post %></small>

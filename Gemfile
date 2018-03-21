@@ -19,6 +19,7 @@ gem 'carrierwave'
 gem 'cloudinary'
 gem 'will_paginate', '~> 3.1.0'
 gem 'bootstrap-will_paginate'
+gem 'rails_autolink'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
