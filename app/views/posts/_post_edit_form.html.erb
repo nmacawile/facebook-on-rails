@@ -1,0 +1,7 @@
+<%= form_for @post, remote: true do |f| %>
+  <%= f.text_area :body, class: ["form-control", "post-text-area"] %>
+  <br />
+  <div class="text-right">
+    <%= f.submit "Save", class: ["btn", "btn-primary"] %>
+  </div>
+<% end %>

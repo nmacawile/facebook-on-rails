@@ -9,6 +9,10 @@ class PostsController < ApplicationController
   before_action :check_if_owner_or_still_friends, only: [:edit, :update]
   
   def edit
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
     
   def create
@@ -24,11 +28,23 @@ class PostsController < ApplicationController
   
   def update
     if @post.update_attributes(post_params)
-      flash[:success] = "Post updated."
+      respond_to do |format|
+        format.html { 
+          flash[:success] = "Post updated."
+          redirect_to user_path(@post.user)
+        }
+        format.js
+      end
     else
-      flash[:danger] = "Post not updated."
+      respond_to do |format|
+        format.html { 
+          flash[:danger] = "Post not updated."
+          redirect_to user_path(@post.user)
+        }
+        format.js
+      end
     end
-    redirect_to user_path(@post.user)
+   
   end
   
   def destroy
