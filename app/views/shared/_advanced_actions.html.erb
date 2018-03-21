@@ -4,7 +4,7 @@
     <span class="glyphicon glyphicon-option-horizontal"></span></a>
     <ul class="dropdown-menu">
       <% if current_user == object.author %>
-        <li><%= link_to "Edit", send("edit_#{type}_path", object) %></li>
+        <li><%= link_to "Edit", send("edit_#{type}_path", object), remote: true %></li>
       <% end %>
       <li><%= link_to "Delete", send("#{type}_path", object), method: :delete, remote: true, data: { confirm: "Are you sure?" } %></li>
     </ul>

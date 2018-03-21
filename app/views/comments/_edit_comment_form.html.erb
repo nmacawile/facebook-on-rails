@@ -1,0 +1,13 @@
+<%= form_for @comment, remote: true, html: { class:"comment-form" } do |f| %>
+  <div class="input-group">
+    <%= f.text_field :body, placeholder: @comment.body, class: ["form-control", "comment-text-field"], autocomplete: :off %>
+    <span class="input-group-btn">
+      <%= button_tag class: ["btn", "btn-default", "comment-btn"], type: :reset, data: { disable_with: icon("fas", "spinner", class: "fa-spin") } do %>
+        <%= icon("fas", "times") %>
+      <% end %>
+      <%= button_tag class: ["btn", "btn-default", "comment-btn"], type: :submit, data: { disable_with: icon("fas", "spinner", class: "fa-spin") } do %>
+        <%= icon("far", "comment-alt") %>
+      <% end %>
+    </span>
+  </div>
+<% end %>

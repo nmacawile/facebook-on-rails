@@ -13,6 +13,10 @@ class CommentsController < ApplicationController
   end
   
   def edit
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
     
   def create
@@ -34,11 +38,17 @@ class CommentsController < ApplicationController
   
   def update
     if @comment.update_attributes(comment_params)
-      flash[:success] = "Comment updated."
+      respond_to do |format|
+        format.html {
+          flash[:success] = "Comment updated."
+          redirect_to @page_owner
+        }
+        format.js
+      end
     else
       flash[:danger] = "Comment not updated."
+      redirect_to @page_owner
     end
-    redirect_to @page_owner
   end
   
   def destroy

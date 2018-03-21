@@ -7,6 +7,7 @@
       <%= render "shared/advanced_actions", type: "comment", object: comment %>
       <strong><%= link_to comment.user.full_name, comment.user %></strong> <%= comment.body %>
     </div>
+    
     <div class="comment-interactions">
       <%= comment_toggleable_like_button(comment) if user_signed_in? %> <small class="comment-likes-count"><%= likes_count(comment) %></small>
       <span class="comment-timestamp"><%= time_ago_in_words(comment.created_at) %> ago</span>

@@ -1,8 +1,9 @@
-<%= form_for [post, Comment.new], remote: true do |f| %>
-  <span class="comment-avatar">
-    <%= avatar_link current_user, :comment_thumb %>
-  </span>
-  <div class="comment-form">
+<span class="comment-avatar">
+  <%= avatar_link current_user, :comment_thumb %>
+</span>
+
+<div class="comment-wrapper">
+  <%= form_for [post, Comment.new], remote: true, html: { class:"comment-form" } do |f| %>
     <div class="input-group">
       <%= f.text_field :body, placeholder: "Comment on this post...", class: ["form-control", "comment-text-field"], autocomplete: :off %>
       <span class="input-group-btn">
@@ -11,5 +12,5 @@
         <% end %>
       </span>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
