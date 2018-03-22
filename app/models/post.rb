@@ -1,4 +1,13 @@
 class Post < ApplicationRecord
+  
+  before_validation do
+    self.body = ActionController::Base.helpers.strip_tags body
+  end
+  
+  before_validation do
+    self.body = body.strip.gsub(/\R{2,}/, "\r\n\r\n").gsub(/\R/, "\r\n")
+  end
+  
   belongs_to :user
   belongs_to :poster, class_name: "User"
   has_many :comments, dependent: :destroy

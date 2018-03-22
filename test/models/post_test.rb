@@ -21,4 +21,16 @@ class PostTest < ActiveSupport::TestCase
     @post.body = "   "
     assert_not @post.valid?
   end
+  
+  test "should be sanitized of any tags before validation" do
+    @post.body = "<script></script><em></em><br /><br ><a href='#'>A</a>"
+    @post.save
+    assert_equal @post.reload.body, "A"
+  end
+  
+  test "should reduce consecutive line breaks before validation" do
+    @post.body = "\r\nA\r\n\r\n\r\n\r\n\r\n\r\nB\r\nC\r\n"
+    @post.save
+    assert_equal @post.reload.body, "A\r\n\r\nB\r\nC"
+  end
 end

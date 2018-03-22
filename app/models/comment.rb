@@ -1,4 +1,9 @@
 class Comment < ApplicationRecord
+  
+  before_validation do
+    self.body = ActionController::Base.helpers.strip_tags body
+  end
+  
   belongs_to :user
   belongs_to :post
   

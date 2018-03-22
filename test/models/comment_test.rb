@@ -21,4 +21,10 @@ class CommentTest < ActiveSupport::TestCase
     @comment.body = "   "
     assert_not @comment.valid?
   end
+  
+  test "should be sanitized of any tags before validation" do
+    @comment.body = "<script></script><em></em><br /><br ><a href='#'>A</a>"
+    @comment.save
+    assert_equal @comment.reload.body, "A"
+  end
 end
