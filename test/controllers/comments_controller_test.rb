@@ -25,13 +25,13 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   test "#edit, commenter signed in, no longer friends with page owner" do
     sign_in users(:user2)
     get edit_comment_path comments(:comment3)
-    assert_redirected_to @page_owner
+    assert_redirected_to @post
   end
   
   test "#edit, signed in but not the commenter" do
     sign_in @page_owner
     get edit_comment_path @comment
-    assert_redirected_to @page_owner
+    assert_redirected_to @post
     assert_not flash.empty?
   end
   
@@ -43,7 +43,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   test "#update, commenter signed in" do
     sign_in @commenter
     patch comment_path(@comment, params: { comment: { body: "updated comment" } })
-    assert_redirected_to @page_owner
+    assert_redirected_to @post
     follow_redirect!
     assert_match "updated comment", response.body
   end
@@ -51,7 +51,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   test "#update, commenter signed in, not friends anymore" do
     sign_in users(:user2)
     patch comment_path(comments(:comment3), params: { comment: { body: "updated comment" } })
-    assert_redirected_to @page_owner
+    assert_redirected_to @post
     follow_redirect!
     assert_no_match "updated comment", response.body
   end
@@ -59,7 +59,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   test "#update, signed in but not the commenter" do
     sign_in @page_owner
     patch comment_path(@comment, params: { comment: { body: "updated comment" } })
-    assert_redirected_to @page_owner
+    assert_redirected_to @post
     follow_redirect!
     assert_not flash.empty?
     assert_no_match "updated comment", response.body
@@ -77,7 +77,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "@post.comments.count", 1 do
       post post_comments_path(@post, params: { comment: { body: "new comment" } })
     end
-    assert_redirected_to @page_owner
+    assert_redirected_to @post
   end
   
   test "#create, user signed in, not a friend of page owner" do
@@ -85,7 +85,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference "@post.comments.count" do
       post post_comments_path(@post, params: { comment: { body: "new comment" } })
     end
-    assert_redirected_to @page_owner
+    assert_redirected_to @post
   end
   
   test "#create, user signed in, friend of page owner" do
@@ -93,7 +93,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "@post.comments.count", 1 do
       post post_comments_path(@post, params: { comment: { body: "new comment" } })
     end
-    assert_redirected_to @page_owner
+    assert_redirected_to @post
   end
   
   test "#delete, not signed in" do
@@ -108,7 +108,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "@post.comments.count", -1 do
       delete comment_path @comment
     end
-    assert_redirected_to @page_owner
+    assert_redirected_to @post
   end
   
   test "#delete, commenter signed in" do
@@ -116,7 +116,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_difference "@post.comments.count", -1 do
       delete comment_path @comment
     end
-    assert_redirected_to @page_owner
+    assert_redirected_to @post
   end
   
   test "#delete, neither commenter nor page owner signed in" do
@@ -124,7 +124,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference "@post.comments.count" do
       delete comment_path @comment
     end
-    assert_redirected_to @page_owner
+    assert_redirected_to @post
     assert_not flash.empty?
   end
 end

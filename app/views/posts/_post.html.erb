@@ -1,4 +1,5 @@
 <% edit_mode ||= false %>
+<% simplify ||= edit_mode %>
 <li class="post" id=<%= "post_#{post.id}" %>>
   <div class="post-avatar">
     <%= avatar_link post.poster, :post_thumb %>
@@ -11,20 +12,22 @@
   </span>
   <span class="timestamp"> <%= time_ago_in_words(post.created_at) %> ago</span>
   
-  <%= render("shared/advanced_actions", type: "post", object: post) unless edit_mode %>
+  <%= render("shared/advanced_actions", type: "post", object: post) unless simplify %>
   
   <span class="post-content">
     <% unless edit_mode %>
       <div class="post-body"><%= auto_link post.body.gsub(/(\n\s*){2,}/, "<br /><br />").gsub(/\n\s*/, "<br />"), html: { target: "_blank" } %></div>
-      <div class="post-interactions">
-        <%= post_toggleable_like_button(post) if user_signed_in? %>
-        <small class="post-likes-count"><%= likes_count post %></small>
-      </div>
+      <% unless simplify %>
+        <div class="post-interactions">
+          <%= post_toggleable_like_button(post) if user_signed_in? %>
+          <small class="post-likes-count"><%= likes_count post %></small>
+        </div>
+      <% end %>
     <% else %>
       <%= render "post_edit_form" %>
     <% end %>
   </span>
   
-  <%= render("users/comments/comments", post: post) unless edit_mode %>
+  <%= render("users/comments/comments", post: post) unless simplify %>
   
 </li>

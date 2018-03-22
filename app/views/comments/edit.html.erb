@@ -1,6 +1,16 @@
-<h1>Edit Comment</h1>
-<%= form_for @comment do |f| %>
-  <%= f.label :Comment %>
-  <%= f.text_area :body %>
-  <%= f.submit :comment %>
-<% end %>
+<ul class="posts col-md-7 col-md-offset-3">
+  <%= render @comment.post, simplify: true %>
+  
+  <div class="post">
+    <strong>Edit comment</strong>
+    <div class="comment">
+      <span class="comment-avatar">
+        <%= avatar_link current_user, :comment_thumb %>
+      </span>
+      <div class="comment-wrapper">
+        <%= render "edit_comment_form" %>
+      </div>
+    </div>
+  </div>
+  <%= link_to "Back to post", @comment.post %>
+</ul>

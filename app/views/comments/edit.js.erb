@@ -1,1 +1,1 @@
-$("#comment_<%= @comment.id %> .comment-body").replaceWith('<%= j render 'edit_comment_form' %>');
+$("#comment_<%= @comment.id %> .comment-body").replaceWith('<%= j render 'edit_comment_form', remote: true %>');
