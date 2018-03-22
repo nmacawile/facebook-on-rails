@@ -25,13 +25,13 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "#edit, poster signed in, not friends anymore" do
     sign_in users(:user2)
     get edit_post_path posts(:post3)
-    assert_redirected_to @user
+    assert_redirected_to posts(:post3)
   end
   
   test "#edit, signed in but not the poster" do
     sign_in @user
     get edit_post_path @post2
-    assert_redirected_to @user4
+    assert_redirected_to @post2
     assert_not flash.empty?
   end
   
@@ -43,7 +43,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "#update, poster signed in" do
     sign_in @user5
     patch post_path(@post2, params: { post: { body: "updated post" } })
-    assert_redirected_to @user4
+    assert_redirected_to @post2
     follow_redirect!
     assert_match "updated post", response.body
   end
@@ -51,7 +51,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "#update, poster signed in, not friends anymore" do
     sign_in users(:user2)
     patch post_path(posts(:post3), params: { post: { body: "updated post" } })
-    assert_redirected_to @user
+    assert_redirected_to posts(:post3)
     follow_redirect!
     assert_no_match "updated post", response.body
   end
@@ -59,7 +59,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "#update, signed in but not the poster" do
     sign_in @user4
     patch post_path(@post2, params: { post: { body: "updated post" } })
-    assert_redirected_to @user4
+    assert_redirected_to @post2
     follow_redirect!
     assert_not flash.empty?
     assert_no_match "updated post", response.body
@@ -116,7 +116,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference "User.find_by_username(@user4.username).posts.count" do
       delete post_path @post2
     end
-    assert_redirected_to @user4
+    assert_redirected_to @post2
     assert_not flash.empty?
   end
 end
