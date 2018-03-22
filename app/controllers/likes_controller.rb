@@ -14,7 +14,7 @@ class LikesController < ApplicationController
           redirect_to root_url
         else
           flash[:success] = "You liked the #{@type.downcase}." 
-          redirect_to @post.user
+          redirect_to @post
         end
       }
       format.js {
@@ -29,7 +29,7 @@ class LikesController < ApplicationController
     respond_to do |format|
       format.html { 
         flash[:success] = "You unliked the #{@type.downcase}."
-        redirect_to @post.user
+        redirect_to @post
       }
       format.js  { render action: "#{@type.downcase}s_toggleable" }
     end
