@@ -16,7 +16,7 @@
   
   <span class="post-content">
     <% unless edit_mode %>
-      <div class="post-body"><%= auto_link post.body.gsub(/\R/, "<br />"), html: { target: "_blank" } %></div>
+      <div class="post-body"><%= auto_link post.body.gsub(/\R/, "<br />"), link: :urls, html: { target: "_blank" } %></div>
       <% unless simplify %>
         <div class="post-interactions">
           <%= post_toggleable_like_button(post) if user_signed_in? %>

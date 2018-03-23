@@ -5,7 +5,7 @@
   <div class="comment-wrapper">
     <div class="comment-body">
       <%= render "shared/advanced_actions", type: "comment", object: comment %>
-      <strong><%= user_link comment.user %></strong> <%= auto_link comment.body, html: { target: '_blank' } %>
+      <strong><%= user_link comment.user %></strong> <%= auto_link comment.body, link: :urls, html: { target: '_blank' } %>
     </div>
     
     <div class="comment-interactions">
