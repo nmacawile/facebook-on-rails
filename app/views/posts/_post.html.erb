@@ -4,7 +4,7 @@
   <div class="post-avatar">
     <%= avatar_link post.poster, :post_thumb %>
   </div>
-  <span class="post-user-link"><strong><%= link_to post.poster.full_name, post.poster %></strong>
+  <span class="post-user-link"><strong><%= user_link post.poster %></strong>
     <% if post.poster != post.user %>
       <%= icon("fas", "caret-right") %>
       <strong><%= link_to post.user.full_name, post.user %></strong>

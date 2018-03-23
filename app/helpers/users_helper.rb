@@ -42,6 +42,16 @@ module UsersHelper
   end
   
   def avatar_link(user, version, path = user)
-    link_to image_tag(user.avatar_url(version)), path
+    link_to image_tag(user.avatar_url(version)), path,
+                                                 title: "@#{user.username}",
+                                                 class: "tag-tooltip",
+                                                 data: { toggle: :tooltip }
+  end
+  
+  def user_link(user)
+    link_to user.full_name, user,
+                            title: "@#{user.username}",
+                            class: "tag-tooltip",
+                            data: { toggle: :tooltip }
   end
 end
