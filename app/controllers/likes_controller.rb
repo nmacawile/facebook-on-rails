@@ -25,7 +25,7 @@ class LikesController < ApplicationController
   end
   
   def unlike
-    Like.where(like_params).first.destroy
+    Like.where(like_params).where(liker: current_user).first.destroy
     respond_to do |format|
       format.html { 
         flash[:success] = "You unliked the #{@type.downcase}."
