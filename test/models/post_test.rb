@@ -4,6 +4,8 @@ class PostTest < ActiveSupport::TestCase
   
   def setup
     poster = users(:user1)
+    @bob = users(:user2)
+    @pat = users(:user3)
     @post = poster.posts.build(poster: poster,
                                body: "thequickbrownfoxjumpsoverthelazydog")
   end
@@ -32,5 +34,17 @@ class PostTest < ActiveSupport::TestCase
     @post.body = "\r\nA\r\n\r\n\r\n\r\n\r\n\r\nB\r\nC\r\n"
     @post.save
     assert_equal @post.reload.body, "A\r\n\r\nB\r\nC"
+  end
+  
+  test "should save username mentions as links" do
+    @post.body = "Hello @#{@bob.username}"
+    @post.save
+    assert_equal @post.reload.body, "Hello <a href=\"/user/#{@bob.username}\">@#{@bob.username}</a>"
+  end
+  
+  test "should save multiple username mentions as links" do
+    @post.body = "Hello @#{@bob.username} and @#{@pat.username}"
+    @post.save
+    assert_equal @post.reload.body, "Hello <a href=\"/user/#{@bob.username}\">@#{@bob.username}</a> and <a href=\"/user/#{@pat.username}\">@#{@pat.username}</a>"
   end
 end

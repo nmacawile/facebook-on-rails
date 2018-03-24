@@ -8,6 +8,10 @@ class Post < ApplicationRecord
     self.body = body.strip.gsub(/\R{2,}/, "\r\n\r\n").gsub(/\R/, "\r\n")
   end
   
+  before_save do
+    self.body = body.gsub(/@(\w{1,20})/, "<a href=\"/user/\\1\">@\\1</a>")
+  end
+  
   belongs_to :user
   belongs_to :poster, class_name: "User"
   has_many :comments, dependent: :destroy
