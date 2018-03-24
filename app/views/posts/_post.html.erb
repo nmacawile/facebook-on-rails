@@ -7,7 +7,7 @@
   <span class="post-user-link"><strong><%= user_link post.poster %></strong>
     <% if post.poster != post.user %>
       <%= icon("fas", "caret-right") %>
-      <strong><%= link_to post.user.full_name, post.user %></strong>
+      <strong><%= user_link post.user %></strong>
     <% end %>
   </span>
   <span class="timestamp"> <%= time_ago_in_words(post.created_at) %> ago</span>

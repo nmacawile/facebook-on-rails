@@ -1,3 +1,5 @@
 $(document).on("turbolinks:load", function() {
-  $('.tag-tooltip').tooltip();
+  $("body").tooltip({
+    selector: '[data-toggle="tooltip"]'
+  });
 });
