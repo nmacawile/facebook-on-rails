@@ -29,7 +29,7 @@ class Post < ApplicationRecord
   belongs_to :poster, class_name: "User"
   has_many :comments, dependent: :destroy
   
-  has_many :likes, as: :likeable
+  has_many :likes, as: :likeable, dependent: :destroy
   has_many :likers, through: :likes
   
   has_many :notifications_linked, class_name: "Notification",
