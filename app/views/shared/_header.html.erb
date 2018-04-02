@@ -35,16 +35,43 @@
       <ul class="nav navbar-nav navbar-right">
       
         <li><%= link_to icon("fas", "user-circle") << " ".html_safe << current_user.first_name, current_user %></li>
-        <li><%= link_to icon("fas", "home") << " Home", root_url %></li>
         <li><%= link_to icon("fas", "users") << " Friends", friends_user_path(current_user) %></li>
+        
+        
+        
+        <li class="dropdown">
+          
+          <a class="dropdown-toggle" data-toggle="dropdown"  href="/notifications">
+            <%= icon("fas", "bell") %>
+            Notifications
+            <small id="notifications-count" class="count"><%= current_user.notifications.count %></small>
+          </a>
+          
+          <ul class="notifications dropdown-menu">
+            <% if current_user.notifications.any? %>
+            	<% current_user.notifications.first(5).each do |notification| %>
+            	  <%= render "notifications/notification", notification: notification %>
+            	<% end %>
+            	<% if current_user.notifications.count > 5 %> 
+            	  <li class="notification"><%= link_to "View all notifications", notifications_path, class: "description" %></li>
+            	<% end %>
+            <% else %>
+              <li class="notification">There are no new notifications.</li>
+            <% end %>
+          </ul>
+          
+          
+        </li>
         
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown"  href="#">
             <%= icon("fas", "user-plus") %>
             Friend Requests
+            <small class="count"><%= current_user.friend_requests_received.count %></small>
+          </a>
           <ul class="dropdown-menu">
-            <li><%= link_to("Sent", sent_friend_requests_path) %></li>
-            <li><%= link_to('Recieved', received_friend_requests_path) %></li>
+            <li><%= link_to("Sent (#{current_user.friend_requests_sent.count})", sent_friend_requests_path) %></li>
+            <li><%= link_to("Received (#{current_user.friend_requests_received.count})", received_friend_requests_path) %></li>
           </ul>
         </li>
         
@@ -58,7 +85,7 @@
         </li>
       </ul>
       
-      </div>
+    </div>
       
     <% else %>
     

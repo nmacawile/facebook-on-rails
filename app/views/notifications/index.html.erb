@@ -1,0 +1,11 @@
+<div class="container col-md-6 col-md-offset-3">
+  <h1>Notifications</h1>
+  	<ul class="notifications">
+      <% if @notifications.any? %>
+      	<%= render @notifications, with_delete_links: true %>
+      <% else %>
+        <li class="notification">There are no new notifications.</li>
+      <% end %>
+    </ul>
+    <%= will_paginate @notifications %>
+</div>

@@ -4,6 +4,11 @@ class Comment < ApplicationRecord
     self.body = ActionController::Base.helpers.strip_tags body
   end
   
+  after_create do
+    owner.notify!(author, :comment, post)
+    post.author.notify!(author, :comment, post)
+  end
+  
   belongs_to :user
   belongs_to :post
   

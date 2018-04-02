@@ -22,4 +22,12 @@ friendship3:
   
 friendship3_2:
   user: user5
-  friend: user4  
+  friend: user4
+  
+friendship4:  
+  user: notif_actor
+  friend: notif_owner
+  
+friendship4_2:  
+  user: notif_owner
+  friend: notif_actor

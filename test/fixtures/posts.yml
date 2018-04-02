@@ -14,3 +14,8 @@ post3:
   user: user1
   poster: user2
   body: "Yo."
+  
+notif_post:
+  user: notif_owner
+  poster: notif_actor
+  body: "Notification"

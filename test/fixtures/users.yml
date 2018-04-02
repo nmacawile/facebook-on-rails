@@ -67,3 +67,21 @@ user7:
   birthday: Date.parse("09/09/1999")
   gender: :not_telling
   encrypted_password: abc123
+  
+notif_actor:
+  first_name: Notif
+  last_name: Actor
+  username: n_actor
+  email: na@email.com
+  birthday: Date.parse("09/09/1999")
+  gender: :not_telling
+  encrypted_password: abc123
+  
+notif_owner:
+  first_name: Notif
+  last_name: Owner
+  username: n_owner
+  email: no@email.com
+  birthday: Date.parse("09/09/1999")
+  gender: :not_telling
+  encrypted_password: abc123

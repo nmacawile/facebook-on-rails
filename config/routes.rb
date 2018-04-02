@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :notifications, only: [:index, :show, :destroy]
+
   root 'pages#home'
   resources :user, param: :username, controller: "users", shallow: true, only: :show do
     resources :posts, only: [:show, :edit, :update, :create, :destroy] do

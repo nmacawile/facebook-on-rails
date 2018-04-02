@@ -1,4 +1,9 @@
 class Friendship < ApplicationRecord
+  
+  after_create do
+    friend.notify!(user, :add)
+  end
+  
   belongs_to :user
   belongs_to :friend, class_name: "User"
   

@@ -303,3 +303,32 @@ body {
   background-color: black;
   padding: 10px;
 }
+
+.notifications {
+  
+  .notification {
+    height: 42px;
+    padding: 5px;
+    list-style: none;
+    
+    .description, .delete-notification {
+      display: block;
+      padding: 5px;
+      height: 32px;
+      clear: none;
+      margin-left: 32px;
+    }
+    
+    .description {
+      margin-right: 20px;
+    }
+  }
+}
+  
+.count {
+  background-color: red;
+  min-width: 20px;
+  border-radius: 12px;
+  display: inline-block;
+  text-align: center;
+}

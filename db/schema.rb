@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315151030) do
+ActiveRecord::Schema.define(version: 20180325045723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,17 @@ ActiveRecord::Schema.define(version: 20180315151030) do
     t.index ["liker_id"], name: "index_likes_on_liker_id", using: :btree
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "actor_id"
+    t.integer  "receipient_id"
+    t.string   "linkable_type"
+    t.integer  "linkable_id"
+    t.integer  "action"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["receipient_id"], name: "index_notifications_on_receipient_id", using: :btree
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "body"
@@ -101,6 +112,8 @@ ActiveRecord::Schema.define(version: 20180315151030) do
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "likes", "users", column: "liker_id"
+  add_foreign_key "notifications", "users", column: "actor_id"
+  add_foreign_key "notifications", "users", column: "receipient_id"
   add_foreign_key "posts", "users"
   add_foreign_key "posts", "users", column: "poster_id"
 end

@@ -12,12 +12,29 @@ class Post < ApplicationRecord
     self.body = body.gsub(/@(\w{1,20})/, "<a href=\"/user/\\1\">@\\1</a>")
   end
   
+  after_create do
+    owner.notify!(author, :post, self)
+  end
+  
+  after_save do
+    mentions = body.scan(/@(\w{1,20})/).flatten
+    
+    users_mentioned = User.where_username(mentions)
+    users_mentioned.each do |user|
+      user.notify!(author, :mention, self) unless user == owner
+    end
+  end
+  
   belongs_to :user
   belongs_to :poster, class_name: "User"
   has_many :comments, dependent: :destroy
   
   has_many :likes, as: :likeable
   has_many :likers, through: :likes
+  
+  has_many :notifications_linked, class_name: "Notification",
+                                  as: :linkable,
+                                  dependent: :destroy
   
   default_scope { order(id: :desc) }
   

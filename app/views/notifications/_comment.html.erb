@@ -1,0 +1,5 @@
+<% if notification.linkable.author == current_user %>
+<%= "#{notification.actor.full_name} commented on your post." %>
+<% else %>
+<%= "#{notification.actor.full_name} commented on a post." %>
+<% end %>

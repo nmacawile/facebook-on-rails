@@ -2,6 +2,10 @@ class FriendRequest < ApplicationRecord
   belongs_to :user
   belongs_to :friend, class_name: "User"
   
+  after_create {
+    friend.notify!(user, :friend_request)
+  }
+  
   validates :user_id, uniqueness: { scope: :friend_id }
   validate :avoid_befriending_self
   validate :avoid_sending_if_already_friends

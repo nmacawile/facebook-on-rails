@@ -1,0 +1,2 @@
+$(".notification_<%= @notification.id %>").fadeOut();
+$("#notifications-count").html("<%= j current_user.notifications.count.to_s %>");

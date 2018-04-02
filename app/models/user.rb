@@ -46,6 +46,13 @@ class User < ApplicationRecord
   has_many :comments_liked, through: :likings,
                             source: :likeable,
                             source_type: "Comment"
+                            
+  has_many :notifications, foreign_key: :receipient_id,
+                           dependent: :destroy
+                           
+  has_many :notifications_linked, class_name: "Notification",
+                                  as: :linkable,
+                                  dependent: :destroy
   
   validates :last_name, presence: true,
                         length: { maximum: 50 }
@@ -85,6 +92,14 @@ class User < ApplicationRecord
     friends.include? user
   end
   
+  def notify!(actor, action, linkable = nil)
+    linkable ||= actor
+    Notification.create(actor: actor,
+                        receipient: self,
+                        action: action,
+                        linkable: linkable)
+  end
+  
   def to_param
     username
   end
@@ -104,6 +119,11 @@ class User < ApplicationRecord
   
   def self.find_by_username(username)
     where("LOWER(username) = ?", username.downcase).first
+  end
+  
+  def self.where_username(usernames)
+    usernames.map! { |username| username.downcase }
+    where("LOWER(username) IN (?)", usernames)
   end
   
   def self.from_omniauth(access_token)
