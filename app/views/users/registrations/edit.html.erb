@@ -6,19 +6,25 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= devise_error_messages! %>
     
-      <div class="form-field">
+      <div class="form-group">
         <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "Email" %>
       </div>
       
-      <div class="form-field">
-        <%= f.label :first_name %><br />
-        <%= f.text_field :first_name, class: "form-control" %>
-      </div>
-    
-      <div class="form-field">
-        <%= f.label :last_name %><br />
-        <%= f.text_field :last_name, class: "form-control" %>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :first_name %><br />
+            <%= f.text_field :first_name, class: "form-control", placeholder: "First Name" %>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :last_name %><br />
+            <%= f.text_field :last_name, class: "form-control", placeholder: "Last Name" %>
+          </div>
+        </div>
       </div>
       
       <div class="form-group">
@@ -27,32 +33,25 @@
       </div>
       
       <div class="form-group">
-        
-        <%= f.label :gender %><br />
-        <div class="radio">
+        <div class="radio-inline">
           <%= f.radio_button :gender, "male" %>
           <%= f.label :male %><br />
         </div>
         
-        <div class="radio">
+        <div class="radio-inline">
           <%= f.radio_button :gender, "female" %>
           <%= f.label :female %><br />
         </div>
         
-        <div class="radio">
+        <div class="radio-inline">
           <%= f.radio_button :gender, "other" %>
           <%= f.label :other %><br />
         </div>
         
-        <div class="radio">
-          <%= f.radio_button :gender, "not_telling" %>
+        <div class="radio-inline">
+          <%= f.radio_button :gender, "not_telling", checked: true %>
           <%= f.label :not_telling%><br />
         </div>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :username %><br />
-        <%= f.text_field :username, class: "form-control" %>
       </div>
     
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -60,16 +59,22 @@
       <% end %>
     
       <div class="form-group">
-        <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+        <%= f.label :username %><br />
+        <%= f.text_field :username, class: "form-control", placeholder: "Username" %>
+      </div>
+    
+      <div class="form-group">
         <% if @minimum_password_length %>
-          <em><%= @minimum_password_length %> characters minimum</em>
+          <%= f.label :password %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <br />
         <% end %>
+        <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password" %>
       </div>
     
       <div class="form-group">
         <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "Password Confirmation" %>
       </div>
     
       <h3>Confirm Changes</h3>
