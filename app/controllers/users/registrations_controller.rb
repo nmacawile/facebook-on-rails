@@ -10,9 +10,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    SignupNotifierMailer.send_signup_email(resource).deliver unless resource.invalid?
+  end
 
   # GET /resource/edit
   # def edit
