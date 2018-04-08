@@ -1,5 +1,5 @@
 class SignupNotifierMailer < ApplicationMailer
-  default :from => 'no-reply@fb-on-rails.herokuapp.com'
+  default :from => 'FB on Rails <no-reply@fb-on-rails.herokuapp.com>'
 
   def send_signup_email(user)
     @user = user
