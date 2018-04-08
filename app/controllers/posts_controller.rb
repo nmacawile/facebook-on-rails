@@ -30,7 +30,7 @@ class PostsController < ApplicationController
   end
   
   def update
-    if @post.update_attributes(post_params)
+    if @post.update_attributes(body: params[:post][:body])
       respond_to do |format|
         format.html { 
           flash[:success] = "Post updated."
@@ -59,7 +59,7 @@ class PostsController < ApplicationController
   private
     
     def post_params
-      params.require(:post).permit(:body)
+      params.require(:post).permit(:body, :photo)
     end
     
     def load_user

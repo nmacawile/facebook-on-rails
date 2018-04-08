@@ -133,12 +133,19 @@ body {
   padding: 0;
 }
 
+.post, .next_page {
+  width: 662px;
+}
+
 .post {
   border-radius: 5px;
   border: 1px solid rgb(220, 220, 220);
   background-color: white;
   margin: 10px 0;
   padding: 10px;
+  .post-photo { 
+    margin: 5px 0;
+  }
 }
 
 .comments {
@@ -231,6 +238,7 @@ body {
 
 .post-content {
   display: block;
+  min-height: 40px;
   word-wrap: break-word;
   margin-left: 60px;
   .post-actions {
@@ -239,7 +247,6 @@ body {
 }
 
 .post-body {
-  min-height: 40px;
 }
 
 .post-avatar {

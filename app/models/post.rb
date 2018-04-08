@@ -20,6 +20,8 @@ class Post < ApplicationRecord
     end
   end
   
+  mount_uploader :photo, PhotoUploader
+  
   belongs_to :user
   belongs_to :poster, class_name: "User"
   has_many :comments, dependent: :destroy
