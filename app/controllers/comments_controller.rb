@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!
   before_action :load_comment, only: [:edit, :update, :destroy]
   before_action :load_post
   before_action :page_owner_or_friend_only, only: :create
@@ -7,10 +7,6 @@ class CommentsController < ApplicationController
   before_action :commenter_or_page_owner_only, only: :destroy
   before_action :commenter_only, only: [:edit, :update]
   before_action :check_if_owner_or_still_friends, only: [:edit, :update]
-  
-  def index
-    @comments = @post.comments
-  end
   
   def edit
     respond_to do |format|
