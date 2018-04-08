@@ -2,6 +2,10 @@ require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
   
+  def setup
+    sign_in users(:user1)  
+  end
+  
   test "#show should match case-insensitively" do
     get '/user/SpongeBoB'
     assert_response :success

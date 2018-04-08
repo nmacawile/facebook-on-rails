@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   
+  before_action :authenticate_user!
   before_action :load_user, only: [:show, :friends, :avatar]
   
   def index
