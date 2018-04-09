@@ -100,4 +100,78 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     assert_equal @user.reload.username, new_uname 
   end
+  
+  test "should remove spaces from both ends of first_name" do
+    @user.first_name = " Walt   "
+    @user.save
+    assert_equal @user.reload.first_name, "Walt"
+  end
+  
+  test "should remove spaces from both ends of last_name" do
+    @user.last_name = " White   "
+    @user.save
+    assert_equal @user.reload.last_name, "White"
+  end
+  
+  test "should squeeze consecutive spaces in the first_name" do
+    @user.first_name = "Wal  Ter"
+    @user.save
+    assert_equal @user.reload.first_name, "Wal Ter"
+  end
+  
+  test "should squeeze consecutive spaces in the last_name" do
+    @user.first_name = "Whi   Te"
+    @user.save
+    assert_equal @user.reload.first_name, "Whi Te"
+  end
+  
+  test "should be valid first_names" do
+    names = ["Ms. Jan Levinson-Gould",
+             "Dr. Martin Luther King, Jr.",
+             "Brett d'Arras-d'Haudracey",
+             "Brüno",
+             "John Doe",
+             "Mary-Jo Jane Sally Smith"]
+    names.each do |name|
+      @user.first_name = name 
+      assert @user.valid?
+    end
+  end
+  
+  test "should be valid last_names" do
+    names = ["Ms. Jan Levinson-Gould",
+             "Dr. Martin Luther King, Jr.",
+             "Brett d'Arras-d'Haudracey",
+             "Brüno",
+             "John Doe",
+             "Mary-Jo Jane Sally Smith"]
+    names.each do |name|
+      @user.last_name = name 
+      assert @user.valid?
+    end
+  end
+  
+  test "should be invalid first_names" do
+    names = ["Fatty Mc.Error$",
+             "FA!L",
+             "#arold Newm@n",
+             "N4m3 w1th Numb3r5"]
+             
+    names.each do |name|
+      @user.first_name = name 
+      assert_not @user.valid?
+    end
+  end
+
+  test "should be invalid last_names" do
+    names = ["Fatty Mc.Error$",
+             "FA!L",
+             "#arold Newm@n",
+             "N4m3 w1th Numb3r5"]
+             
+    names.each do |name|
+      @user.last_name = name 
+      assert_not @user.valid?
+    end
+  end
 end

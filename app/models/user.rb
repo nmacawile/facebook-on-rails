@@ -1,6 +1,12 @@
 require 'uri_validator'
 
 class User < ApplicationRecord
+  
+  before_save do
+    self.first_name = first_name.strip.squeeze(" ")
+    self.last_name = last_name.strip.squeeze(" ")
+  end
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -55,9 +61,11 @@ class User < ApplicationRecord
                                   dependent: :destroy
   
   validates :last_name, presence: true,
-                        length: { maximum: 50 }
+                        length: { maximum: 50 },
+                        format: { with: /\A[^0-9`!@#\$%\^&*+_=]+\z/ }
   validates :first_name, presence: true,
-                         length: { maximum: 50 }
+                         length: { maximum: 50 },
+                         format: { with: /\A[^0-9`!@#\$%\^&*+_=]+\z/ }
   validates :gender, presence: true
   validates :birthday, presence: true
   validates :username, presence: true,
