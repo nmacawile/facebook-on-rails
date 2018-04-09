@@ -1,0 +1,69 @@
+<% content_for :title, "Edit Profile" %>
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+
+    <h2>Edit Profile</h2>
+    
+    <div class="main-avatar-container">
+      <%= avatar_link current_user, :home_display, avatar_path %>
+    </div>
+    
+    <br />
+    
+    <ul>
+      <li><%= link_to "Change Avatar", avatar_path %></li>
+      <li><%= link_to "Change Banner", banner_path %></li>
+    </ul>
+    
+    <%= form_for(current_user, as: resource_name, url: update_profile_path, html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :first_name %><br />
+            <%= f.text_field :first_name, class: "form-control", placeholder: "First Name" %>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :last_name %><br />
+            <%= f.text_field :last_name, class: "form-control", placeholder: "Last Name" %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :birthday %><br />
+        <%= f.date_field :birthday, class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <div class="radio-inline">
+          <%= f.radio_button :gender, "male" %>
+          <%= f.label :male %><br />
+        </div>
+        
+        <div class="radio-inline">
+          <%= f.radio_button :gender, "female" %>
+          <%= f.label :female %><br />
+        </div>
+        
+        <div class="radio-inline">
+          <%= f.radio_button :gender, "other" %>
+          <%= f.label :other %><br />
+        </div>
+        
+        <div class="radio-inline">
+          <%= f.radio_button :gender, "not_telling" %>
+          <%= f.label :not_telling%><br />
+        </div>
+      </div>
+      
+      <div class="actions">
+        <%= f.submit "Update", class: ["btn", "btn-primary", "btn-block"] %>
+      </div>
+    <% end %>
+  </div>
+</div>

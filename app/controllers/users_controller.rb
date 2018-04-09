@@ -15,6 +15,20 @@ class UsersController < ApplicationController
     end
   end
   
+  def edit
+  end
+  
+  def update
+    @user = current_user
+    if @user.update_attributes(user_profile_params)
+      flash[:success] = "Your profile has been updated."
+      redirect_to edit_profile_path
+    else
+      flash.now[:danger] = "There was a problem."
+      render 'edit'
+    end
+  end
+  
   def search
     @users = User.search(params[:q]).paginate(page: params[:page], per_page: 10)
   end
@@ -36,5 +50,9 @@ class UsersController < ApplicationController
   
     def load_user
       @user = User.find_by_username(params[:username])
+    end
+    
+    def user_profile_params
+      params.require(:user).permit(:first_name, :last_name, :birthday, :gender)
     end
 end

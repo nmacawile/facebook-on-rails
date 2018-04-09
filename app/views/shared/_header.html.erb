@@ -34,7 +34,7 @@
     
       <ul class="nav navbar-nav navbar-right">
       
-        <li><%= link_to icon("fas", "user-circle") << " ".html_safe << current_user.first_name, current_user %></li>
+        <li><%= link_to icon("fas", "user-circle") << " " << current_user.first_name, current_user %></li>
         <li><%= link_to icon("fas", "users") << " Friends", friends_user_path(current_user) %></li>
         
         
@@ -43,7 +43,6 @@
           
           <a class="dropdown-toggle" data-toggle="dropdown"  href="/notifications">
             <%= icon("fas", "bell") %>
-            Notifications
             <small id="notifications-count" class="count"><%= current_user.notifications.count %></small>
           </a>
           
@@ -66,12 +65,11 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown"  href="#">
             <%= icon("fas", "user-plus") %>
-            Friend Requests
             <small class="count"><%= current_user.friend_requests_received.count %></small>
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to("Sent (#{current_user.friend_requests_sent.count})", sent_friend_requests_path) %></li>
-            <li><%= link_to("Received (#{current_user.friend_requests_received.count})", received_friend_requests_path) %></li>
+            <li><%= link_to("Friend Requests Sent (#{current_user.friend_requests_sent.count})", sent_friend_requests_path) %></li>
+            <li><%= link_to("Friend Requests Received (#{current_user.friend_requests_received.count})", received_friend_requests_path) %></li>
           </ul>
         </li>
         
@@ -79,6 +77,7 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <span class="caret"></span></a>
           <ul class="dropdown-menu">
+            <li><%= link_to icon("fas", "edit") << " Edit Profile", edit_profile_path %></li>
             <li><%= link_to icon("fas", "cog") << " Settings", edit_user_registration_path %></li>
             <li><%= link_to icon("fas", "sign-out-alt") << " Log Out", destroy_user_session_path, method: :delete %></li>
           </ul>

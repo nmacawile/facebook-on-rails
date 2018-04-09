@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
   end
   get "users", to: "users#index", as: :users
+  get "edit_profile", to: "users#edit", as: :edit_profile
+  put "update_profile", to: "users#update", as: :update_profile
   resource :avatar, only: [:update, :show]
   resource :banner, only: [:update, :show]
   resources :friendships, only: [:create, :destroy]
