@@ -1,3 +1,4 @@
+<% content_for :title, "Edit Post" %>
 <ul class="posts col-md-6 col-md-offset-3">
   <%= render @post, edit_mode: true %>
   <%= link_to "Back to #{@post.user.first_name}'s page", @post.user %>

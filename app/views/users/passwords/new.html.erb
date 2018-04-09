@@ -1,3 +1,4 @@
+<% content_for :title, "Password Reset" %>
 <div class="contaner">
   <div class="col-md-6 col-md-offset-3">
 
@@ -15,6 +16,8 @@
         <%= f.submit "Send me reset password instructions", class: ["btn", "btn-primary", "btn-block"] %>
       </div>
     <% end %>
+    
+    <br />
     
     <%= render "users/shared/links" %>
   </div>

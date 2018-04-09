@@ -1,4 +1,10 @@
 module ApplicationHelper
+  
+  def generate_title(title)
+    full_title = "Facebook on Rails"
+    full_title.prepend "#{title} - " unless title.blank?
+    full_title
+  end
     
   def use_google_data
     google_data = session['devise.google_data'] && session['devise.google_data']['info']
