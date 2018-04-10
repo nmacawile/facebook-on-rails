@@ -88,7 +88,10 @@ class User < ApplicationRecord
   def add_as_friend!(user)
     self.friends << user
     self.reverse_friends << user
-    FriendRequest.fetch(user, self).destroy
+    fr = FriendRequest.fetch(user, self)
+    if fr
+      fr.destroy
+    end
   end
   
   def unfriend!(user)
