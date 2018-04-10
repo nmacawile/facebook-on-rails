@@ -50,6 +50,7 @@ class UsersController < ApplicationController
   
     def load_user
       @user = User.find_by_username(params[:username])
+      redirect_to root_url if @user.nil?
     end
     
     def user_profile_params
