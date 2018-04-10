@@ -19,7 +19,11 @@
         <% end %>
       </li>
     <% end %>
-    <%= render @posts %>
+    <% if @posts.any? %>
+      <%= render @posts %>
+    <% else %>
+      There are no posts in this page.
+    <% end %>
   </ul>
 
   <% if @posts.next_page %>

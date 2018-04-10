@@ -54,4 +54,14 @@ module UsersHelper
                             class: "tag-tooltip",
                             data: { toggle: :tooltip }
   end
+  
+  def no_friends(user)
+    message = " have any friends yet. "
+    if user == current_user
+      message = ("You don't" << message << link_to("Find friends here.", users_path)).html_safe
+    else
+      message = "#{@user.first_name} doesn't" << message
+    end
+    message
+  end
 end

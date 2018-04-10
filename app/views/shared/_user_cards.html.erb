@@ -1,21 +1,29 @@
+<% message_if_empty ||= "No users found." %>
+
 <div class="col-md-7">
   <% unless title.blank? %>
     <h2><%= title %></h2>
   <% end %>
-  <ul class="user-cards">
-    <% @users.each do |user| %>
-      <li class="user-card">
-        <div class="friend-btn-container">
-          <%= friendship_action_links(user) %>
-        </div>
-        <div class="user-card-avatar">
-          <%= avatar_link user, :post_thumb %>
-        </div>
-        <span class="user-card-name"><strong><%= user_link user %></strong><br />
-        <%= "@#{user.username}" %></span>
-      </li>
-    <% end %>
-  </ul>
+  
+  <% if @users.any? %>
+    <ul class="user-cards">
+      <% @users.each do |user| %>
+        <li class="user-card">
+          <div class="friend-btn-container">
+            <%= friendship_action_links(user) %>
+          </div>
+          <div class="user-card-avatar">
+            <%= avatar_link user, :post_thumb %>
+          </div>
+          <span class="user-card-name"><strong><%= user_link user %></strong><br />
+          <%= "@#{user.username}" %></span>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <%= message_if_empty %>
+  <% end %>
+  
   <%= will_paginate @users %>
 </div>
     
