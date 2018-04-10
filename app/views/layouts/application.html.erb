@@ -10,10 +10,11 @@
   </head>
 
   <body>
-    <div style="margin-top: 50px;">
+    <div style="margin-top: 50px; min-height: 768px;">
       <%= render "shared/header" %>
       <%= render "shared/flash" %>
       <%= yield %>
     </div>
+    <%= render "shared/footer" %>
   </body>
 </html>

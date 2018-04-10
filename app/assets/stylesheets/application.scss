@@ -339,3 +339,13 @@ body {
   display: inline-block;
   text-align: center;
 }
+
+.footer {
+  a:link {
+    color: gray;
+  }
+  color: gray;
+  margin-top: 20px;
+  margin-bottom: 0;
+  border-radius: 0;
+}
