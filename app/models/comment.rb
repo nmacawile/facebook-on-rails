@@ -5,7 +5,7 @@ class Comment < ApplicationRecord
   end
   
   after_create do
-    owner.notify!(author, :comment, post)
+    owner.notify!(author, :comment, self, post)
     post.author.notify!(author, :comment, self, post)
   end
   
