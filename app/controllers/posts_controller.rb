@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :load_user, only: :create
   before_action :redirect_if_not_friend_or_owner, only: :create
   before_action :load_post, only: [:show, :edit, :update, :destroy]
-  before_action :author_or_page_owner_only, only: :destroy
+  before_action :admin_author_or_page_owner_only, only: :destroy
   before_action :author_only, only: [:edit, :update]
   before_action :check_if_owner_or_still_friends, only: [:edit, :update]
   
@@ -77,8 +77,8 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
     
-    def author_or_page_owner_only
-      redirect_to_post unless current_user == @post.poster || current_user == @post.user
+    def admin_author_or_page_owner_only
+      redirect_to_post unless current_user == @post.poster || current_user == @post.user || current_user.admin?
     end
     
     def author_only

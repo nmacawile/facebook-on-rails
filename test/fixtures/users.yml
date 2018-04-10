@@ -85,3 +85,13 @@ notif_owner:
   birthday: Date.parse("09/09/1999")
   gender: :not_telling
   encrypted_password: abc123
+  
+admin:
+  first_name: Admin
+  last_name: User
+  username: admin
+  email: admin@email.com
+  birthday: Date.parse("09/09/1999")
+  gender: :not_telling
+  encrypted_password: abc123
+  admin: true

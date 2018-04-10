@@ -1,4 +1,4 @@
-<% if user_signed_in? && current_user == object.author || current_user == object.owner %>
+<% if user_signed_in? && current_user == object.author || current_user == object.owner || current_user.admin? %>
   <div class="dropdown advanced-actions">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
     <span class="glyphicon glyphicon-option-horizontal"></span></a>

@@ -1,0 +1,13 @@
+<%= render "banner", active: yield(:active).to_sym %>
+<div class="container">
+  <div class="row">
+    
+    <div class="col-md-3" <%= "style=color:green" if @user.admin? %>>
+      <h3><%= @user.full_name %></h3>
+      <h4>@<%= @user.username %></h4>
+      <%= content_tag(:span, icon("fas", "shield-alt") << " Administrator") if @user.admin? %>
+    </div>
+    
+    <%= yield :content %>
+  </div>
+</div>

@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   before_action :load_post
   before_action :page_owner_or_friend_only, only: :create
   before_action :load_page_owner, only: [:edit, :update, :destroy]
-  before_action :commenter_or_page_owner_only, only: :destroy
+  before_action :admin_commenter_or_page_owner_only, only: :destroy
   before_action :commenter_only, only: [:edit, :update]
   before_action :check_if_owner_or_still_friends, only: [:edit, :update]
   
@@ -83,8 +83,8 @@ class CommentsController < ApplicationController
       @page_owner = @comment.post.user
     end
     
-    def commenter_or_page_owner_only
-      redirect_to_post unless current_user == @comment.user || current_user == @page_owner
+    def admin_commenter_or_page_owner_only
+      redirect_to_post unless current_user == @comment.user || current_user == @page_owner || current_user.admin?
     end
     
     def commenter_only

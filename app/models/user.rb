@@ -116,6 +116,10 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
   
+  def admin?
+    admin
+  end
+  
   def self.search(query)
     return User.none if query.blank?
     if query =~ /@/

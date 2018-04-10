@@ -1,11 +1,4 @@
-<% content_for :title, "Friends - #{@user.full_name}" %>
-<%= render "banner", active: :friends %>
-<div class="container" id="main-container">
-  <div class="row">
-    <div class="col-md-3">
-      <h3><%= @user.full_name %></h3>
-      <h4>@<%= @user.username %></h4>
-    </div>
-    <%= render "shared/user_cards", collection: @user.friends, title: "" %>
-  </div>
-</div>
+<% content_for :title, "Friends #{@user.full_name}" %>
+<% content_for :active, :friends %>
+<% content_for :content, render("shared/user_cards", collection: @user.friends, title: "") %>
+<%= render "profile" %>
