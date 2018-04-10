@@ -3,6 +3,7 @@ class Notification < ApplicationRecord
   belongs_to :receipient, class_name: "User"
   belongs_to :actor, class_name: "User"
   belongs_to :linkable, polymorphic: true
+  belongs_to :notifiable, polymorphic: true
   
   default_scope { order(id: :desc) }
   

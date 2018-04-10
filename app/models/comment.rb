@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
   
   after_create do
     owner.notify!(author, :comment, post)
-    post.author.notify!(author, :comment, post)
+    post.author.notify!(author, :comment, self, post)
   end
   
   belongs_to :user
@@ -14,6 +14,10 @@ class Comment < ApplicationRecord
   
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :likers, through: :likes
+  
+  has_many :notifications_associated_with, class_name: "Notification",
+                                           as: :notifiable,
+                                           dependent: :destroy
   
   default_scope { order(:id) }
   

@@ -4,4 +4,42 @@ notification1:
   receipient: notif_owner
   linkable: notif_post
   linkable_type: Post
+  notifiable: notif_post
+  notifiable_type: Post
   action: post
+  
+post_notif:
+  actor: notif_actor
+  receipient: notif_owner
+  linkable: n_post
+  linkable_type: Post
+  notifiable: n_post
+  notifiable_type: Post
+  action: post
+  
+comment_notif:
+  actor: notif_actor
+  receipient: notif_owner
+  linkable: n_comment_post
+  linkable_type: Post
+  notifiable: n_comment
+  notifiable_type: Comment
+  action: comment
+
+friend_request_notif:
+  actor: user1
+  receipient: notif_owner
+  linkable: user1
+  linkable_type: User
+  notifiable: n_friend_request
+  notifiable_type: FriendRequest
+  action: friend_request
+  
+add_notif:
+  actor: notif_actor
+  receipient: notif_owner
+  linkable: notif_actor
+  linkable_type: User
+  notifiable: friendship4_2
+  notifiable_type: Friendship
+  action: add

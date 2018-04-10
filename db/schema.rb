@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409230345) do
+ActiveRecord::Schema.define(version: 20180410020809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,8 +63,10 @@ ActiveRecord::Schema.define(version: 20180409230345) do
     t.string   "linkable_type"
     t.integer  "linkable_id"
     t.integer  "action"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
     t.index ["receipient_id"], name: "index_notifications_on_receipient_id", using: :btree
   end
 

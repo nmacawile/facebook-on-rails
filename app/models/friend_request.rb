@@ -1,10 +1,15 @@
 class FriendRequest < ApplicationRecord
+  
+  after_create do
+    friend.notify!(user, :friend_request, self)
+  end
+  
   belongs_to :user
   belongs_to :friend, class_name: "User"
-  
-  after_create {
-    friend.notify!(user, :friend_request)
-  }
+                                  
+  has_many :notifications_associated_with, class_name: "Notification",
+                                           as: :notifiable,
+                                           dependent: :destroy
   
   validates :user_id, uniqueness: { scope: :friend_id }
   validate :avoid_befriending_self

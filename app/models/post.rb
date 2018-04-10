@@ -9,14 +9,14 @@ class Post < ApplicationRecord
   end
   
   after_create do
-    owner.notify!(author, :post, self)
+    owner.notify!(author, :post, self, self)
   end
   
   after_save do
     mentions = body.scan(/@(\w{1,20})/).flatten
     users_mentioned = User.where_username(mentions)
     users_mentioned.each do |user|
-      user.notify!(author, :mention, self) unless user == owner
+      user.notify!(author, :mention, self, self) unless user == owner
     end
   end
   
@@ -32,6 +32,10 @@ class Post < ApplicationRecord
   has_many :notifications_linked, class_name: "Notification",
                                   as: :linkable,
                                   dependent: :destroy
+                                  
+  has_many :notifications_associated_with, class_name: "Notification",
+                                           as: :notifiable,
+                                           dependent: :destroy
   
   default_scope { order(id: :desc) }
   

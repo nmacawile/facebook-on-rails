@@ -7,6 +7,7 @@ class NotificationTest < ActiveSupport::TestCase
                                      receipient: users(:user4),
                                      linkable_type: "Post",
                                      linkable: posts(:post2),
+                                     notifiable: posts(:post2), 
                                      action: :post)
   end
   
@@ -31,6 +32,16 @@ class NotificationTest < ActiveSupport::TestCase
   
   test "should have a linkable_type" do
     @notification.linkable_type = nil
+    assert_not @notification.valid?
+  end
+  
+  test "should have a notifiable" do
+    @notification.notifiable = nil
+    assert_not @notification.valid?
+  end
+  
+  test "should have a notifiable_type" do
+    @notification.notifiable_type = nil
     assert_not @notification.valid?
   end
  

@@ -88,23 +88,24 @@ class User < ApplicationRecord
   def add_as_friend!(user)
     self.friends << user
     self.reverse_friends << user
-    self.friends_to_confirm.delete(user)
+    FriendRequest.fetch(user, self).destroy
   end
   
   def unfriend!(user)
-    self.friends.delete(user)
-    self.reverse_friends.delete(user)
+    Friendship.fetch(self, user).destroy
+    Friendship.fetch(user, self).destroy
   end
   
   def friends_with?(user)
     friends.include? user
   end
   
-  def notify!(actor, action, linkable = nil)
+  def notify!(actor, action, notifiable, linkable = nil)
     linkable ||= actor
     Notification.create(actor: actor,
                         receipient: self,
                         action: action,
+                        notifiable: notifiable,
                         linkable: linkable)
   end
   

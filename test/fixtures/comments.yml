@@ -3,11 +3,19 @@
 comment1:
   user: user2
   post: post1
+  body: "This is a comment"
   
 comment2:
   user: user1
   post: post2
+  body: "This is a comment"
   
 comment3:
   user: user2
   post: post2
+  body: "This is a comment"
+  
+n_comment:
+  user: notif_actor
+  post: n_comment_post
+  body: "This is a comment"

@@ -19,3 +19,13 @@ notif_post:
   user: notif_owner
   poster: notif_actor
   body: "Notification"
+  
+n_post:
+  user: notif_owner
+  poster: notif_actor
+  body: "Hey!!"
+  
+n_comment_post:
+  user: notif_owner
+  poster: notif_actor
+  body: "Hey Again!!"

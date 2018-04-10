@@ -7,3 +7,7 @@
 friend_request1:
   user: user1
   friend: user2
+  
+n_friend_request:
+  user: user1
+  friend: notif_owner
