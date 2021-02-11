@@ -1,2 +1,6 @@
 $(".notification_<%= @notification.id %>").fadeOut();
 $("#notifications-count").html("<%= j current_user.notifications.count.to_s %>");
+<% if current_user.notifications.count == 0 %>
+  $("#notifications-count").fadeOut();
+  $(".notifications").html('<li class="notification">There are no new notifications.</li>')
+<% end %>

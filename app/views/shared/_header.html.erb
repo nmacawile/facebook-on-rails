@@ -43,7 +43,7 @@
           
           <a class="dropdown-toggle" data-toggle="dropdown"  href="/notifications">
             <%= icon("fas", "bell") %>
-            <small id="notifications-count" class="count"><%= current_user.notifications.count %></small>
+            <small id="notifications-count" class="count<%= ' hidden' if current_user.notifications.count == 0 %>"><%= current_user.notifications.count %></small>
           </a>
           
           <ul class="notifications dropdown-menu">
@@ -65,7 +65,7 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown"  href="#">
             <%= icon("fas", "user-plus") %>
-            <small class="count"><%= current_user.friend_requests_received.count %></small>
+            <small class="count<%= ' hidden' if current_user.friend_requests_received.count == 0 %>"><%= current_user.friend_requests_received.count %></small>
           </a>
           <ul class="dropdown-menu">
             <li><%= link_to("Friend Requests Sent (#{current_user.friend_requests_sent.count})", sent_friend_requests_path) %></li>
