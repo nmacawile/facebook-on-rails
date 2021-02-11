@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby '2.4.3'
+ruby '2.7.2'
 gem 'rails', '~> 5.0.6'
 gem 'devise'
 gem 'omniauth', '~> 1.9'
@@ -24,7 +24,7 @@ gem 'rails_autolink'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.12.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
