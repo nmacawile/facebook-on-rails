@@ -158,7 +158,8 @@ GEM
     orm_adapter (0.5.0)
     pg (0.21.0)
     public_suffix (4.0.6)
-    puma (3.12.6)
+    puma (4.3.9)
+      nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-test (0.6.3)
@@ -277,7 +278,7 @@ DEPENDENCIES
   omniauth (~> 1.9)
   omniauth-google-oauth2 (~> 0.8.0)
   pg (~> 0.18)
-  puma (~> 3.12.6)
+  puma (~> 4.3.9)
   rails (~> 5.0.6)
   rails-controller-testing
   rails_autolink
