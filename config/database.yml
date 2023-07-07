@@ -24,7 +24,7 @@ default: &default
 development:
   <<: *default
   template: template0
-  database: workspace_development
+  database: fb_rails_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -59,7 +59,7 @@ development:
 test:
   <<: *default
   template: template0
-  database: workspace_test
+  database: fb_rails_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -82,6 +82,5 @@ test:
 #
 production:
   <<: *default
-  database: workspace_production
-  username: workspace
-  password: <%= ENV['WORKSPACE_DATABASE_PASSWORD'] %>
+  database: fb_rails_production
+  url: <%= ENV["DATABASE_URL"] %>

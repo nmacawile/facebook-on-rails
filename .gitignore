@@ -22,3 +22,6 @@
 
 # Temporary images
 /public/uploads/tmp/*
+
+# Docker
+docker-compose.*

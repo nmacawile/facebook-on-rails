@@ -40,7 +40,9 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  force_ssl = ENV['FORCE_SSL']
+
+  config.force_ssl = force_ssl.blank? || force_ssl.downcase != 'false'
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
@@ -60,14 +62,14 @@ Rails.application.configure do
   #### Sendgrid settings
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: ENV['host'] }
+  config.action_mailer.default_url_options = { host: ENV['HOST'] }
   ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
+    :address        => ENV['MAILER_ADDRESS'],
     :port           => '587',
     :authentication => :plain,
-    :user_name      => ENV['sendgrid_user_name'],
-    :password       => ENV['sendgrid_password'],
-    :domain         => 'heroku.com',
+    :user_name      => ENV['MAILER_USERNAME'],
+    :password       => ENV['MAILER_PASSWORD'],
+    :domain         => ENV['DOMAIN'],
     :enable_starttls_auto => true
   }
   ####

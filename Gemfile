@@ -7,8 +7,8 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby '2.7.2'
-gem 'rails', '~> 5.0.6'
+ruby '2.7.8'
+gem 'rails', '~> 5.0.7'
 gem 'devise'
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
@@ -16,13 +16,13 @@ gem 'figaro'
 gem 'faker'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'font-awesome-sass', '~> 5.0.6'
-gem 'carrierwave'
+gem 'carrierwave', '~> 2.2.1'
 gem 'cloudinary'
 gem 'will_paginate', '~> 3.1.0'
 gem 'bootstrap-will_paginate'
 gem 'rails_autolink'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.18'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.12.6'
 # Use SCSS for stylesheets
