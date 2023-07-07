@@ -3,69 +3,66 @@ User.create!(email: "admin@email.com",
              last_name: "Account",
              birthday: Date.parse("10/10/2000"),
              gender: :male,
-             username: "admin",
-             password: ENV["admin_password"],
-             password_confirmation: ENV["admin_password"],
+             username: ENV["ADMIN_USERNAME"],
+             password: ENV["ADMIN_PASSWORD"],
+             password_confirmation: ENV["ADMIN_PASSWORD"],
              remote_avatar_url: "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
              admin: true)
 
-images = %w(https://images.pexels.com/photos/450271/pexels-photo-450271.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/428339/pexels-photo-428339.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/253758/pexels-photo-253758.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/569163/pexels-photo-569163.jpeg?h=400&auto=compress&cs=tinysrgb
-            
-            https://images.pexels.com/photos/103123/pexels-photo-103123.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/415326/pexels-photo-415326.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/462680/pexels-photo-462680.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/326559/pexels-photo-326559.jpeg?h=400&auto=compress&cs=tinysrgb
-            
-            https://images.pexels.com/photos/206445/pexels-photo-206445.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/712513/pexels-photo-712513.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/539727/pexels-photo-539727.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/325531/pexels-photo-325531.jpeg?h=400&auto=compress&cs=tinysrgb
-            
-            https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/842567/pexels-photo-842567.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/428333/pexels-photo-428333.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/377058/pexels-photo-377058.jpeg?h=400&auto=compress&cs=tinysrgb
-            https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?h=400&auto=compress&cs=tinysrgb)
+images = %w(https://images.pexels.com/photos/1624229/pexels-photo-1624229.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/2219273/pexels-photo-2219273.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/1820919/pexels-photo-1820919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/2169098/pexels-photo-2169098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/2860233/pexels-photo-2860233.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
 
-banners = %w(https://images.pexels.com/photos/355423/pexels-photo-355423.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/358482/pexels-photo-358482.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/127753/pexels-photo-127753.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/461797/pexels-photo-461797.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/356977/pexels-photo-356977.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             
-             https://images.pexels.com/photos/388415/pexels-photo-388415.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/239520/pexels-photo-239520.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/414586/pexels-photo-414586.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/459063/pexels-photo-459063.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/814499/pexels-photo-814499.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             
-             https://images.pexels.com/photos/462024/pexels-photo-462024.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/355312/pexels-photo-355312.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/240040/pexels-photo-240040.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/128458/pexels-photo-128458.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             
-             https://images.pexels.com/photos/414276/pexels-photo-414276.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/462149/pexels-photo-462149.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/462086/pexels-photo-462086.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/314860/pexels-photo-314860.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             https://images.pexels.com/photos/145685/pexels-photo-145685.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
-             )
+            https://images.pexels.com/photos/2059101/pexels-photo-2059101.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/3756506/pexels-photo-3756506.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/1940547/pexels-photo-1940547.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/2112715/pexels-photo-2112715.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/3846150/pexels-photo-3846150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+
+            https://images.pexels.com/photos/7289412/pexels-photo-7289412.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/5543385/pexels-photo-5543385.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/5220075/pexels-photo-5220075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/7925814/pexels-photo-7925814.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/10080749/pexels-photo-10080749.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+
+            https://images.pexels.com/photos/3988043/pexels-photo-3988043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/9789893/pexels-photo-9789893.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/10039008/pexels-photo-10039008.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/9930284/pexels-photo-9930284.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+            https://images.pexels.com/photos/10057618/pexels-photo-10057618.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)
+
+banners = %w(https://images.pexels.com/photos/1172064/pexels-photo-1172064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/1266810/pexels-photo-1266810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/108941/pexels-photo-108941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/1834399/pexels-photo-1834399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/3551227/pexels-photo-3551227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+
+             https://images.pexels.com/photos/733171/pexels-photo-733171.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/1784577/pexels-photo-1784577.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/3408353/pexels-photo-3408353.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/3363331/pexels-photo-3363331.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/5875873/pexels-photo-5875873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+
+             https://images.pexels.com/photos/4666754/pexels-photo-4666754.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/13829125/pexels-photo-13829125.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/1658967/pexels-photo-1658967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/1682407/pexels-photo-1682407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/9458045/pexels-photo-9458045.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+
+             https://images.pexels.com/photos/9574076/pexels-photo-9574076.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/11869182/pexels-photo-11869182.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/192320/pexels-photo-192320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/11389480/pexels-photo-11389480.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+             https://images.pexels.com/photos/2365362/pexels-photo-2365362.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)
 
 # Create Users
-20.times do |n|
-  
-  first_name = Faker::Name.first_name
+def create_user(first_name, index, image, banner)
   last_name = Faker::Name.last_name
-  username = (first_name.first + last_name).gsub("\s+", "") + n.to_s
+  username = (first_name.first + last_name).gsub("\s+", "") + index.to_s
   
-  User.create!(email: "user#{n}@email.com",
+  User.create!(email: "user#{index}@email.com",
                first_name: first_name,
                last_name: last_name,
                birthday: Date.parse("10/10/2000"),
@@ -73,9 +70,21 @@ banners = %w(https://images.pexels.com/photos/355423/pexels-photo-355423.jpeg?au
                username: username,
                password: "password" + username.downcase,
                password_confirmation: "password" + username.downcase,
-               remote_avatar_url: images.shift,
-               remote_banner_url: banners.shift)
-  
+               remote_avatar_url: image,
+               remote_banner_url: banner)
+end
+
+
+user_index = 0
+
+10.times do
+  create_user(Faker::Name.female_first_name, user_index, images.shift, banners.shift)
+  user_index += 1
+end
+
+10.times do
+  create_user(Faker::Name.male_first_name, user_index, images.shift, banners.shift)
+  user_index += 1
 end
 #
 
