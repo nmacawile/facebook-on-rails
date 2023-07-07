@@ -90,10 +90,22 @@
     
       <div class="navbar-right collapse navbar-collapse" id="nav-links">
         <%= form_for :user, url: session_path(:user), html: { class: "form-signin navbar-form" } do |f| %>
-            <%= f.label :email, class: "sr-only" %>
-            <%= f.email_field :email, value: nil, autofocus: true, class: "form-control", placeholder: "Email" %>
-            <%= f.label :password, class: "sr-only" %>
-            <%= f.password_field :password, class: "form-control", placeholder: "Password"  %>
+            <%= f.label :email,
+                        class: "sr-only",
+                        for: "header-user-email" %>
+            <%= f.email_field :email,
+                              value: nil,
+                              autofocus: true,
+                              id: "header-user-email",
+                              class: "form-control",
+                              placeholder: "Email" %>
+            <%= f.label :password,
+                         class: "sr-only",
+                         for: "header-user-password" %>
+            <%= f.password_field :password,
+                                 id: "header-user-password",
+                                 class: "form-control",
+                                 placeholder: "Password" %>
           <%= f.button "Log In", class: ["btn", "btn-primary"] %>
           <%= link_to "#{icon("fab", "google")} Log in with Google".html_safe, user_google_oauth2_omniauth_authorize_path, class: ["btn", "btn-default"] %>
         <% end %>

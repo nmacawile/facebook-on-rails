@@ -33,23 +33,23 @@
     
     <div class="form-group">
       <div class="radio-inline">
-        <%= f.radio_button :gender, "male" %>
-        <%= f.label :male %><br />
+        <%= f.radio_button :gender, "male", id: "gender-male" %>
+        <%= f.label :male, for: "gender-male" %><br />
       </div>
       
       <div class="radio-inline">
-        <%= f.radio_button :gender, "female" %>
-        <%= f.label :female %><br />
+        <%= f.radio_button :gender, "female", id: "gender-female" %>
+        <%= f.label :female, for: "gender-female" %><br />
       </div>
       
       <div class="radio-inline">
-        <%= f.radio_button :gender, "other" %>
-        <%= f.label :other %><br />
+        <%= f.radio_button :gender, "other", id: "gender-other"  %>
+        <%= f.label :other, for: "gender-other" %><br />
       </div>
       
       <div class="radio-inline">
-        <%= f.radio_button :gender, "not_telling", checked: true %>
-        <%= f.label :not_telling%><br />
+        <%= f.radio_button :gender, "not_telling", id: "gender-not-telling", checked: true %>
+        <%= f.label :not_telling, for: "gender-not-telling" %><br />
       </div>
     </div>
     
